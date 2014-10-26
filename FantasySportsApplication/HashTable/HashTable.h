@@ -269,5 +269,9 @@ template <class KeyType, class ItemType>
 void HashTable<KeyType, ItemType>::allocateArray()
 {
    hashTable = new HashTableEntry<KeyType, ItemType>*[hashTableSize];
+
+   for (int i = 0; i < hashTableSize; i++) {
+	   hashTable[i] = nullptr;
+   }
 }
 #endif

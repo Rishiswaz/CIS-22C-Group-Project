@@ -1,5 +1,7 @@
 #include <iostream>
-int main(int argc, const char * argv []) {
+#include "HashTable\HashTableTest.h"
 
+int main(int argc, const char * argv []) {
+	testHashTable();
 	return 0;
 }

@@ -21,7 +21,7 @@
     <ClCompile Include="FantasySportsApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HashTable\test.cpp">
+    <ClCompile Include="HashTable\HashTableTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="HashTable\HashTableEntry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HashTable\test.h">
+    <ClInclude Include="HashTable\HashTableTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

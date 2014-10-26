@@ -80,12 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FantasySportsApplication.cpp" />
-    <ClCompile Include="HashTable\test.cpp" />
+    <ClCompile Include="HashTable\HashTableTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTable\HashTable.h" />
     <ClInclude Include="HashTable\HashTableEntry.h" />
-    <ClInclude Include="HashTable\test.h" />
+    <ClInclude Include="HashTable\HashTableTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
