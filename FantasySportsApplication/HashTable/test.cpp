@@ -26,6 +26,11 @@ void testHashTable()
    cout << "Size as expected: " << (table.size() == 3) << endl;
    cout << "isEmpty works: " << (!table.isEmpty()) << endl << endl;
    
+   HashTable<int, string> table2(table);
+   cout << "--Testing copy constructor--" << endl;
+   cout << "Size as expected: " << (table2.size() == 3) << endl << endl;
+   table2.clear();
+   
    table.add(2, "d");
    
    cout << "--Testing duplicate key insertion--" << endl;

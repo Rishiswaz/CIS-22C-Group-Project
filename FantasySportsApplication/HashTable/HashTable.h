@@ -26,6 +26,8 @@ private:
 public:
    HashTable();
    HashTable(int tableSize);
+   HashTable(const HashTable &table);
+   ~HashTable() { clear(); };
    
    bool add(const KeyType& key, const ItemType& item);
    bool remove(const KeyType& key);
@@ -57,6 +59,38 @@ HashTable<KeyType, ItemType>::HashTable(int tableSize)
    hashTableSize = tableSize;
    itemCount = 0;
    allocateArray();
+}
+
+template <class KeyType, class ItemType>
+HashTable<KeyType, ItemType>::HashTable(const HashTable &table)
+{
+   if (this != &table) {
+      this->itemCount = table.itemCount;
+      this->hashTableSize = table.hashTableSize;
+      allocateArray();
+      
+      for (int i = 0; i < this->hashTableSize; i++) {
+         if (table.hashTable[i] != nullptr) {
+            HashTableEntry<KeyType, ItemType>* tablePtr = table.hashTable[i];
+            HashTableEntry<KeyType, ItemType>* curPtr =
+               new HashTableEntry<KeyType, ItemType>(tablePtr->getKey(), tablePtr->getItem());
+            
+            hashTable[i] = curPtr;
+            tablePtr = tablePtr->getNext();
+            
+            
+            while (tablePtr != nullptr) {
+               HashTableEntry<KeyType, ItemType>* entry =
+                  new HashTableEntry<KeyType, ItemType>(tablePtr->getKey(), tablePtr->getItem());
+               
+               curPtr->setNext(entry);
+               curPtr = entry;
+               tablePtr = tablePtr->getNext();
+            }
+         }
+      }
+   }
+   
 }
 
 template <class KeyType, class ItemType>
