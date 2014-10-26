@@ -27,7 +27,7 @@ public:
    HashTable();
    HashTable(int tableSize);
    HashTable(const HashTable &table);
-   ~HashTable() { clear(); };
+   ~HashTable() { clear(); delete hashTable; };
    
    bool add(const KeyType& key, const ItemType& item);
    bool remove(const KeyType& key);
