@@ -10,6 +10,7 @@
 
 using namespace std;
 
+//Tests the hash table function, every test should print "true"
 void testHashTable()
 {
    //Prints out true/false to screen rather than 1/0 for readability

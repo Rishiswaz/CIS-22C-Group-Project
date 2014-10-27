@@ -45,6 +45,13 @@ private:
    void allocateArray();
 };
 
+/*
+ Instantiates a HashTable with default values
+ 
+ @pre none
+ @post none
+ @return none
+ */
 template <class KeyType, class ItemType>
 HashTable<KeyType, ItemType>::HashTable()
 {
@@ -53,6 +60,13 @@ HashTable<KeyType, ItemType>::HashTable()
    allocateArray();
 }
 
+/*
+ Instantiates a HashTable with a custom table size that *should* be a prime number
+ 
+ @pre the size of the table
+ @post none
+ @return none
+ */
 template <class KeyType, class ItemType>
 HashTable<KeyType, ItemType>::HashTable(int tableSize)
 {
@@ -61,6 +75,13 @@ HashTable<KeyType, ItemType>::HashTable(int tableSize)
    allocateArray();
 }
 
+/*
+ Copy constructor
+ 
+ @pre The table to copy
+ @post none
+ @return none
+ */
 template <class KeyType, class ItemType>
 HashTable<KeyType, ItemType>::HashTable(const HashTable &table)
 {
@@ -93,6 +114,17 @@ HashTable<KeyType, ItemType>::HashTable(const HashTable &table)
    
 }
 
+/*
+ Adds or updates an item for a key
+ If the key is new, it will insert a new item with that key
+ If the key is not new, it will update the item for that key
+ 
+ @pre
+   key - The unique key to use
+   item - The item stored for that unique key
+ @post none
+ @return true/false depnding on success
+ */
 template <class KeyType, class ItemType>
 bool HashTable<KeyType, ItemType>::add(const KeyType& key, const ItemType& item)
 {
@@ -129,6 +161,13 @@ bool HashTable<KeyType, ItemType>::add(const KeyType& key, const ItemType& item)
    return true;
 }
 
+/*
+ Removes an entry from the table with that key
+ 
+ @pre key to remove from the table
+ @post none
+ @return true if key was present/false if it was not
+ */
 template <class KeyType, class ItemType>
 bool HashTable<KeyType, ItemType>::remove(const KeyType& key)
 {
@@ -166,6 +205,13 @@ bool HashTable<KeyType, ItemType>::remove(const KeyType& key)
    return itemFound;
 }
 
+/*
+ Retrieves an item assigned to that key in the table
+ 
+ @pre The key to lookup in the table
+ @post none
+ @return The item if found, otherwise throws an exception
+ */
 template <class KeyType, class ItemType>
 ItemType HashTable<KeyType, ItemType>::get(const KeyType& key) const
 {
@@ -193,18 +239,39 @@ ItemType HashTable<KeyType, ItemType>::get(const KeyType& key) const
    return item;
 }
 
+/*
+ Checks if the table is empty
+ 
+ @pre none
+ @post none
+ @return True if empty/false if not empty
+ */
 template <class KeyType, class ItemType>
 bool HashTable<KeyType, ItemType>::isEmpty() const
 {
    return itemCount == 0;
 }
 
+/*
+ Returns the number of elements in the table
+ 
+ @pre none
+ @post none
+ @return Number of elements
+ */
 template <class KeyType, class ItemType>
 int HashTable<KeyType, ItemType>::size() const
 {
    return itemCount;
 }
 
+/*
+ Removes all elements from the table
+ 
+ @pre none
+ @post none
+ @return none
+ */
 template <class KeyType, class ItemType>
 void HashTable<KeyType, ItemType>::clear()
 {
@@ -222,6 +289,13 @@ void HashTable<KeyType, ItemType>::clear()
    }
 }
 
+/*
+ Check if key is present in the table
+ 
+ @pre The key to lookup
+ @post none
+ @return True if found/False if not
+ */
 template <class KeyType, class ItemType>
 bool HashTable<KeyType, ItemType>::contains(const KeyType& key) const
 {
@@ -243,6 +317,14 @@ bool HashTable<KeyType, ItemType>::contains(const KeyType& key) const
    return itemFound;
 }
 
+/*
+ A function that calls the passed function for every element in the table
+ can be use for something like a print table function, or to retrieve every item
+ 
+ @pre The function to call for each element
+ @post none
+ @return none
+ */
 template <class KeyType, class ItemType>
 void HashTable<KeyType, ItemType>::traverse(void visit(ItemType&)) const
 {
@@ -257,7 +339,14 @@ void HashTable<KeyType, ItemType>::traverse(void visit(ItemType&)) const
    }
 }
 
-//This uses C++11 hash function which is quite nice
+/*
+ We need to generate a hash for every key to place accordingly. This method leverages
+ the C++11 hash function which handles the task nicely
+ 
+ @pre They key to hash
+ @post none
+ @return What index in the array to place the key
+ */
 template <class KeyType, class ItemType>
 int HashTable<KeyType, ItemType>::getHashIndex(const KeyType& key) const
 {
@@ -265,6 +354,13 @@ int HashTable<KeyType, ItemType>::getHashIndex(const KeyType& key) const
    return (int)(keyHash(key) % hashTableSize);
 }
 
+/*
+ Used by the constructor(s) to dynamically allocate the array
+ 
+ @pre none
+ @post none
+ @return none
+ */
 template <class KeyType, class ItemType>
 void HashTable<KeyType, ItemType>::allocateArray()
 {
