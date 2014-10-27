@@ -5,3 +5,27 @@ VS-22C-GP
 Allows for a "what-if" situation with to change a team's record and see how it might play out if a 
 given team has a user defined record instead of the record obtained from the API
 -
+
+Team Roles
+=======
+Chris
+
+1. BST
+
+1. Header file definitions by this weekend, look in the book.
+
+Anchit
+
+1. File I/O
+1. Functions
+ 1. vector<Team> readFile(string filePath);
+ 1. bool writeFile(string filePath, vector<Team>);
+
+Rishabh
+
+1. Linked list header file - one in book
+1. Team basic structure
+
+Saagar
+
+1. Print menu options and read input
