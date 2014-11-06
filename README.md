@@ -10,9 +10,12 @@ Team Roles
 =======
 Chris
 
-1. BST
+1. Linked List Header file -one in the book
 
-1. Header file definitions by this weekend, look in the book.
+
+Kairui
+
+1. BST
 
 Anchit
 
@@ -23,7 +26,6 @@ Anchit
 
 Rishabh
 
-1. Linked list header file - one in book
 1. Team basic structure
 
 Saagar
