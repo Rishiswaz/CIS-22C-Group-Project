@@ -1,0 +1,14 @@
+GamesPlayed	: the amount of games the team has played
+thDownsMade	: the amount of third downs a team has converted
+foDownsMade	: the amount of fourth downs a team has converted
+penalties	: the amount of penalties enforced on a team
+penYdsLost	: the amount of yards lost due to penalties (not included in total yards)
+rank		: the current ranking of the team from 1 to 32
+teamNumber	: the position in the csv
+pointsPerGame	: the amount of points scored per game (average)
+tYdsPerGame	: the amount of total yards obtained per game (average)
+pYdsPerGame	: the amount of passing yards obtained per game (average)
+rYdsPerGame	: the amount of rushing yards obtained per game (average)
+frDownsPerGame	: the amount of first downs obtained per game (average)
+tDownPrct	: the success rate of converting third downs (total)
+foDownPrct	: the success rate of converting fourth downs (total)
