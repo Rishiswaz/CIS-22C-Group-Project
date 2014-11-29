@@ -1,5 +1,5 @@
-#ifndef TEAM_H
-#define TEAM_H
+#pragma once
+
 
 #include <stdio.h>
 #include <iostream>
@@ -31,6 +31,7 @@ public:
 private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
 	int wins, losses, yards, percentage;
+	std::string teamName;
 	bool inFilter; //bool flag to see if it is within bounds of the applied filters
 	int playoffIndexScore //use for BST key
 };
@@ -44,53 +45,3 @@ Team::Team()
 Team::~Team()
 {
 }
-
-/*
-***************************NOTE**********************************
-*																*
-* Not sure where/how to implement these filters and because I	*
-* don't want to work on a dead end too long I just put my		*
-* class for it here and if we do use it I can put it into its	*
-* own header and include the functions to pass to the user IO	*
-* files.														*
-*															  	*
-*****************************************************************
-*/
-class DataFilter
-{
-	friend class Team;
-
-public:
-	DataFilter();
-	~DataFilter();
-	DataFilter(int chkVal, int inputMinVal, int inputMaxVal);
-	void applyFilter(std::vector<Team> outputVector,const std::vector<Team> inputVector);
-private:
-	int valueChecked, minVal, maxVal;
-	std::vector <Team> filteredTeamList;
-};
-
-DataFilter::DataFilter(int chkVal, int inputMinVal, int inputMaxVal)
-{
-
-	valueChecked = chkVal;
-	minVal = inputMinVal;
-	maxVal = inputMaxVal;
-
-}
-
-DataFilter::DataFilter()
-{
-}
-
-DataFilter::~DataFilter()
-{
-}
-
-void DataFilter::applyFilter(std::vector<Team> outputVector,const std::vector<Team> inputVector)
-{
-	//for filter assign values for total yards, passing yards, rushing yards, rank, conference, division
-	//loop through all values on the input vector
-	//do not use a literal for the loop max because to apply multiple filters it would be easier to use the size of the vector
-}
-#endif
