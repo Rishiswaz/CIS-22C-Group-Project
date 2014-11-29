@@ -17,7 +17,8 @@ public:
 	void updateData();
 	//Rank manipulation
 	void changeRecord(); //used for changing W/L record.
-	void setRank();
+	void setRank(); //this will set the playoffIndexScore to position it on the Playoff Performance Index
+					//use this after changing any values or updating any data
 	//V-overloaded = operator defined inline (rhs: Right Hand Side)-V
 	Team & operator=(const Team & rhs) 
 	{
