@@ -22,30 +22,14 @@ public:
 	Team & operator=(const Team & rhs) 
 	{
 //LHS (destination)    =     RHS (source)
-		gamesPlayed    = rhs.gamesPlayed;
-		thDownsMade    = rhs.thDownsMade;
-		foDownsMade    = rhs.foDownsMade;
-		penalties      = rhs.penalties;
-		penYdsLost     = rhs.penYdsLost;
-		rank           = rhs.rank;
-		teamNumber     = rhs.teamNumber;
-		pointsPerGame  = rhs.pointsPerGame;
-		tYdsPerGame    = rhs.tYdsPerGame;
-		pYdsPerGame    = rhs.pYdsPerGame;
-		rYdsPerGame    = rhs.rYdsPerGame;
-		frDownsPerGame = rhs.frDownsPerGame;
-		tDownPrct      = rhs.tDownPrct;
-		foDownPrct     = rhs.foDownPrct;
-		timeOP         = rhs.timeOP;
-		teamName       = rhs.teamName;
-		inFilter       = rhs.inFilter;
+		wins = rhs.wins
+		losses= rhs.yards
+		yards = rhs.yards
+		percentage=rhs.percentage;
 	};
 private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
-	int gamesPlayed, thDownsMade, foDownsMade, penalties, penYdsLost, rank, teamNumber,position;
-	float pointsPerGame, tYdsPerGame, pYdsPerGame,rYdsPerGame, frDownsPerGame, tDownPrct, foDownPrct;
-	float timeOP; //Not sure how to store this because in the CSV it is stored in Hours:Min:Sec format
-	std::string teamName;
+	int wins, losses, yards, percentage;
 	bool inFilter; //bool flag to see if it is within bounds of the applied filters
 	int maxVectorSize, count, conference, division;
 };
