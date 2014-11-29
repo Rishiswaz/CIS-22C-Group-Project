@@ -31,7 +31,7 @@ private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
 	int wins, losses, yards, percentage;
 	bool inFilter; //bool flag to see if it is within bounds of the applied filters
-	int maxVectorSize, count, conference, division;
+	int playoffIndexScore //use for BST key
 };
 
 Team::Team()
