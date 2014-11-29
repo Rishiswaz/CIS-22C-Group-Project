@@ -3,6 +3,9 @@ LinkedList.h
 Linked List Implementation File
 --------------------------------*/
 #include<iostream>
+#include<string>
+#include<fstream>
+#include<team.h>
 
 #indef _LINKED_LIST
 #define _LINKED_LIST
@@ -21,7 +24,7 @@ public:
 	virtual bool remove(int position) = 0;												// removes an entry into this list at a given position
 	virtual void clear() = 0;															// removes all entries from this list
 	virtual ItemType getEntry(int position) const = 0;									// gets the entry at the given position in this list
-	virtual void setEntry(int position, const ItemType& newEntry) = 0;					// replaces the entry atthe given position in this list
+	virtual void setEntry(int position, const ItemType& newEntry) = 0;					// replaces the entry at the given position in this list
 };
 
 /*--------------------------------
@@ -33,14 +36,21 @@ class Node
 private:
 	ItemType item;																		// data item
 	Node<ItemType>* next;																// pointer to next node
+	/* File Data */
+	string teamName;
+	int wins;
+	int losses;
+	int yards;
 
 public:
 	/* Constructors and Destructors */
 	Node();																				// Default Constructor
+	Node(const string tName, const int w, const int l, const int y);					// Constructor with File Data parameters
 	Node(const ItemType& anItem);														// Constructor
 	Node(const ItemType& anItem, Node<ItemType>* nextNodePtr);							// Constructor
 
 	/* Public Accessors and Mutators*/
+	bool readData()																		// reads data from file
 	void setItem(const ItemType& anItem);												// assigns data to "item" value
 	void setNext(Node<ItemType>* nextNodePtr);											// sets next pointer
 	ItemType getItem() const;															// returns data from current pointer
@@ -57,7 +67,7 @@ private:
 	Node<ItemType>* headPtr;															// pointer to first node; contains first entry
 	Node<ItemType>* getNodeAt(int position) const;										// Locates specified node in list
 	int itemCount;																		// current count of list items
-	
+
 public:
 	/* Constructors and Destructors */
 	LinkedList();																		// Default Constructor
@@ -66,54 +76,114 @@ public:
 
 	/* ListInterface Functions */
 	bool isEmpty();																		// sees if list is empty
-	int getLength() const;																// gets the current number of entries in this list	
+	int getLength() const;																// gets the current number of entries in this list
 	bool insert(int newPosition, const ItemType& newEntry);								// inserts an entry into this list at a given position
 	bool remove(int position);															// removes an entry into this list at a given position
 	void clear();																		// removes all entries from this list
 
 	ItemType getEntry(int position) const;												// checks if given position is legal
 	void setEntry(int position, const ItemType& newEntry);								// sets entry at given position
+	void sort();                                                                        // sorts list based on input criteria
 };
 
 /*--------------------------------
 Node Class Implementations
 --------------------------------*/
+//Default constructor
+template<class ItemType>
+Node<ItemType>::Node()
+{
+	teamName = " ";
+	wins = 0;
+	losses = 0;
+	yards = 0;
+	next = NULL;
+}
+
+//constructor w/ file data parameters
+template<class ItemType>
+Node<ItemType>::Node(const string tName, const int w, const int l, const y)
+{
+	teamName = tName;
+	wins = w;
+	losses = l;
+	yards = y;
+	next = null;
+}
+
+//constructor
 template<class ItemType>
 Node<ItemType>::Node() : next(null)
 {
 
 }
 
+//constructor
 template<class ItemType>
 Node<ItemType>::Node(const ItemType& anItem) : item(anItem), next(nullptr)
 {
 
 }
 
+//constructor
 template<class ItemType>
 Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr) : item(anItem), next(nextNodePtr)
 {
 
 }
 
+bool Node::readData()
+{
+	string tName;
+	long percentage;
+	string file = "data.csv";
+
+	// Open input file
+	ifstream din;
+	din.open(file.c_str());
+	if (din.fail())
+	{
+		cerr << "Could not open file: " << file << endl;
+		return false;
+	}
+
+	// Read data
+	Node *head = NULL;
+	while (!din.eof())
+	{
+		din >> tName >> percentage;
+
+		Node *temp = new Node(name, percentage);
+		temp->setNext(head);
+		head = temp;
+	}
+
+	din.close();
+	return true;
+}
+
+//setItem
 template<class ItemType>
 void Node<ItemType>::setItem(const ItemType& anItem)
 {
 	item = anItem
 }
 
+//setNext
 template<class ItemType>
 void Node<ItemType>::setNext(Node<ItemType>* nextNodePtr)
 {
 	next = nextNodePtr;
 }
 
+//getItem
 template<class ItemType>
 ItemType Node<ItemType>::getItem() const
 {
 	return item;
 }
 
+//getNext
 template<class ItemType>
 Node<ItemType>* Node<ItemType>::getNext() const
 {
@@ -228,4 +298,199 @@ template<class ItemType>
 LinkedList<ItemType>::~LinkedList()
 {
 	clear();
+}
+
+//sort
+void LinkedList::sort()
+{
+    cout << "Please input desired sort: " << endl;
+    cout << "(1)- Team Name" << endl;
+    cout << "(2)- Wins" << endl;
+    cout << "(3)- Losses" << endl;
+    cout << "(4)- Yards" << endl;
+    cin >> sortInput;
+
+    switch(sortInput)
+    {
+        case 1
+        {
+            if (headPtr != 0)
+            {
+                Node* current = headPtr;
+                Node* prev = 0;
+                Node* tempNode = 0;
+                bool changeFlag = false;
+                for (int i = 0; i < itemCount; i++)
+                {
+                    while (current->next != 0)
+                    {
+                        tempNode = current->next;
+
+                        if (current->teamName > tempNode->teamName)
+                        {
+                            changeFlag = true;
+                            current->next = tempNode->next;
+                            tempNode->next = current;
+                            if (prev != 0)
+                                prev->next = tempNode;
+                            prev = tempNode;
+                            if (headPtr == current)
+                                headPtr = tempNode;
+                            if (current->next == 0)
+                                end = current;
+                        }
+                        else
+                        {
+                            prev = current;
+                            current = current->next;
+                        }
+                    }
+                    if (changeFlag == false)
+                        break;
+                    else
+                    {
+                        prev = 0;
+                        current = headPtr;
+                        changeFlag = false;
+                    }
+                }
+            }
+        }
+
+        case 2
+        {
+            if (headPtr != 0)
+            {
+                Node* current = headPtr;
+                Node* prev = 0;
+                Node* tempNode = 0;
+                bool changeFlag = false;
+                for (int i = 0; i < itemCount; i++)
+                {
+                    while (current->next != 0)
+                    {
+                        tempNode = current->next;
+
+                        if (current->wins > tempNode->wins)
+                        {
+                            changeFlag = true;
+                            current->next = tempNode->next;
+                            tempNode->next = current;
+                            if (prev != 0)
+                                prev->next = tempNode;
+                            prev = tempNode;
+                            if (headPtr == current)
+                                headPtr = tempNode;
+                            if (current->next == 0)
+                                end = current;
+                        }
+                        else
+                        {
+                            prev = current;
+                            current = current->next;
+                        }
+                    }
+                    if (changeFlag == false)
+                        break;
+                    else
+                    {
+                        prev = 0;
+                        current = headPtr;
+                        changeFlag = false;
+                    }
+                }
+            }
+        }
+
+        case 3
+        {
+            if (headPtr != 0)
+            {
+                Node* current = headPtr;
+                Node* prev = 0;
+                Node* tempNode = 0;
+                bool changeFlag = false;
+                for (int i = 0; i < itemCount; i++)
+                {
+                    while (current->next != 0)
+                    {
+                        tempNode = current->next;
+
+                        if (current->losses > tempNode->losses)
+                        {
+                            changeFlag = true;
+                            current->next = tempNode->next;
+                            tempNode->next = current;
+                            if (prev != 0)
+                                prev->next = tempNode;
+                            prev = tempNode;
+                            if (headPtr == current)
+                                headPtr = tempNode;
+                            if (current->next == 0)
+                                end = current;
+                        }
+                        else
+                        {
+                            prev = current;
+                            current = current->next;
+                        }
+                    }
+                    if (changeFlag == false)
+                        break;
+                    else
+                    {
+                        prev = 0;
+                        current = headPtr;
+                        changeFlag = false;
+                    }
+                }
+            }
+        }
+
+        case 4
+        {
+            if (headPtr != 0)
+            {
+                Node* current = headPtr;
+                Node* prev = 0;
+                Node* tempNode = 0;
+                bool changeFlag = false;
+                for (int i = 0; i < itemCount; i++)
+                {
+                    while (current->next != 0)
+                    {
+                        tempNode = current->next;
+
+                        if (current->yards > tempNode->yards)
+                        {
+                            changeFlag = true;
+                            current->next = tempNode->next;
+                            tempNode->next = current;
+                            if (prev != 0)
+                                prev->next = tempNode;
+                            prev = tempNode;
+                            if (headPtr == current)
+                                headPtr = tempNode;
+                            if (current->next == 0)
+                                end = current;
+                        }
+                        else
+                        {
+                            prev = current;
+                            current = current->next;
+                        }
+                    }
+                    if (changeFlag == false)
+                        break;
+                    else
+                    {
+                        prev = 0;
+                        current = headPtr;
+                        changeFlag = false;
+                    }
+                }
+            }
+        }
+
+    }
 }
