@@ -32,7 +32,7 @@ void whatIf();
 
 void printData();
 
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
 
 	vector<Team> PlayoffPicture;
