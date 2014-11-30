@@ -87,6 +87,7 @@
     <ClInclude Include="HashTable\HashTable.h" />
     <ClInclude Include="HashTable\HashTableEntry.h" />
     <ClInclude Include="HashTable\HashTableTest.h" />
+    <ClInclude Include="Implementation.h" />
     <ClInclude Include="Team.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
