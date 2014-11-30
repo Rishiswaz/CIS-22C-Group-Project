@@ -1,9 +1,8 @@
 // PlayoffPictureGroupProject.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include "targetver.h"
-#include "Team.h"
+#include "Team\Team.h"
 #include<stdlib.h>
 #include<iostream>
 #include<string>
@@ -32,7 +31,7 @@ void whatIf();
 
 void printData();
 
-int main()
+int func1()
 {
 
 	vector<Team> PlayoffPicture;

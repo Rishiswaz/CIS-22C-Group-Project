@@ -23,9 +23,9 @@ public:
 	Team & operator=(const Team & rhs) 
 	{
 //LHS (destination)    =     RHS (source)
-		wins = rhs.wins
-		losses= rhs.yards
-		yards = rhs.yards
+		wins = rhs.wins;
+		losses = rhs.yards;
+		yards = rhs.yards;
 		percentage=rhs.percentage;
 	};
 private:
@@ -33,7 +33,7 @@ private:
 	int wins, losses, yards, percentage;
 	std::string teamName;
 	bool inFilter; //bool flag to see if it is within bounds of the applied filters
-	int playoffIndexScore //use for BST key
+	int playoffIndexScore; //use for BST key
 };
 
 Team::Team()
