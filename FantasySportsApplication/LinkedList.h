@@ -50,7 +50,7 @@ public:
 	Node(const ItemType& anItem, Node<ItemType>* nextNodePtr);							// Constructor
 
 	/* Public Accessors and Mutators*/
-	bool readData()																		// reads data from file
+	bool readData();																	// reads data from file
 	void setItem(const ItemType& anItem);												// assigns data to "item" value
 	void setNext(Node<ItemType>* nextNodePtr);											// sets next pointer
 	ItemType getItem() const;															// returns data from current pointer
@@ -65,6 +65,8 @@ class LinkedList : public ListInterface<ItemType>
 {
 private:
 	Node<ItemType>* headPtr;															// pointer to first node; contains first entry
+	Node<ItemType>* curPtr;                                                             // pointer at current entry
+	Node<ItemType>* nullPtr;
 	Node<ItemType>* getNodeAt(int position) const;										// Locates specified node in list
 	int itemCount;																		// current count of list items
 
@@ -102,27 +104,13 @@ Node<ItemType>::Node()
 
 //constructor w/ file data parameters
 template<class ItemType>
-Node<ItemType>::Node(const string tName, const int w, const int l, const y)
+Node<ItemType>::Node(const string tName, const int w, const int l, const int y)
 {
 	teamName = tName;
 	wins = w;
 	losses = l;
 	yards = y;
-	next = null;
-}
-
-//constructor
-template<class ItemType>
-Node<ItemType>::Node() : next(null)
-{
-
-}
-
-//constructor
-template<class ItemType>
-Node<ItemType>::Node(const ItemType& anItem) : item(anItem), next(nullptr)
-{
-
+	next = NULL;
 }
 
 //constructor
@@ -132,10 +120,14 @@ Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr) : item
 
 }
 
-bool Node::readData()
+//readData
+template<class ItemType>
+bool Node<ItemType>::readData()
 {
 	string tName;
-	long percentage;
+	int w;
+	int l;
+	int y;
 	string file = "data.csv";
 
 	// Open input file
@@ -148,12 +140,12 @@ bool Node::readData()
 	}
 
 	// Read data
-	Node *head = NULL;
+	Node<ItemType> *head = NULL;
 	while (!din.eof())
 	{
-		din >> tName >> percentage;
+		din >> tName >> w >> l >> y;
 
-		Node *temp = new Node(name, percentage);
+		Node<ItemType> *temp = new Node(tName, w, l, y);
 		temp->setNext(head);
 		head = temp;
 	}
@@ -166,7 +158,7 @@ bool Node::readData()
 template<class ItemType>
 void Node<ItemType>::setItem(const ItemType& anItem)
 {
-	item = anItem
+	item = anItem;
 }
 
 //setNext
@@ -193,19 +185,12 @@ Node<ItemType>* Node<ItemType>::getNext() const
 /*--------------------------------
 LinkedList Class Implementations
 --------------------------------*/
-//constructor
-template<class ItemType>
-LinkedList<ItemType>::LinkedList() : headPtr(nullptr), itemCount(0)
-{
-
-}
-
 //getNodeAt
 template<class ItemType>
-Node<ItemType>* LinkedList < ItemType::getNodeAt(int position) const
+Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
 {
 	Node<ItemType>* curPtr = headPtr;
-	for (int skip = 1; skip < position; skip++)
+	for (int i = 1; i < position; i++)
 	{
 		curPtr = curPtr->getNext();
 	}
@@ -231,7 +216,7 @@ ItemType LinkedList<ItemType>::getEntry(int position) const
 
 //insert
 template<class ItemType>
-bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry);
+bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 {
 	bool ableToInsert = (newPosition >= 1) && (newPosition <= itemCount + 1);
 	if (ableToInsert)
@@ -249,7 +234,7 @@ bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry);
 			prevPtr->setNext(newNodePtr);
 		}
 
-		itemCount++
+		itemCount++;
 	}
 
 	return ableToInsert;
@@ -271,13 +256,13 @@ bool LinkedList<ItemType>::remove(int position)
 		else
 		{
 			Node<ItemType>* prevPtr = getNodeAt(position - 1);
-			curPtr = prev->getNext();
-			prevPtr->setNext(cur->getNext());
+			curPtr = prevPtr->getNext();
+			prevPtr->setNext(curPtr->getNext());
 		}
 
-		curPtr->setNext(nullptr);
+		curPtr->setNext(nullPtr);
 		delete curPtr;
-		curPtr = nullptr;
+		curPtr = nullPtr;
 
 		itemCount--;
 	}
@@ -299,10 +284,15 @@ LinkedList<ItemType>::~LinkedList()
 {
 	clear();
 }
-
+/*
 //sort
-void LinkedList::sort()
+template<class ItemType>
+void LinkedList<ItemType>::sort()
 {
+    int sortInput;
+    Node<ItemType>* head = headPtr;
+
+
     cout << "Please input desired sort: " << endl;
     cout << "(1)- Team Name" << endl;
     cout << "(2)- Wins" << endl;
@@ -312,11 +302,11 @@ void LinkedList::sort()
 
     switch(sortInput)
     {
-        case 1
+        case 1:
         {
-            if (headPtr != 0)
+            if (head != 0)
             {
-                Node* current = headPtr;
+                Node* current = head;
                 Node* prev = 0;
                 Node* tempNode = 0;
                 bool changeFlag = false;
@@ -334,8 +324,8 @@ void LinkedList::sort()
                             if (prev != 0)
                                 prev->next = tempNode;
                             prev = tempNode;
-                            if (headPtr == current)
-                                headPtr = tempNode;
+                            if (head == current)
+                                head = tempNode;
                             if (current->next == 0)
                                 end = current;
                         }
@@ -350,18 +340,18 @@ void LinkedList::sort()
                     else
                     {
                         prev = 0;
-                        current = headPtr;
+                        current = head;
                         changeFlag = false;
                     }
                 }
             }
         }
 
-        case 2
+        case 2:
         {
-            if (headPtr != 0)
+            if (head != 0)
             {
-                Node* current = headPtr;
+                Node* current = head;
                 Node* prev = 0;
                 Node* tempNode = 0;
                 bool changeFlag = false;
@@ -379,8 +369,8 @@ void LinkedList::sort()
                             if (prev != 0)
                                 prev->next = tempNode;
                             prev = tempNode;
-                            if (headPtr == current)
-                                headPtr = tempNode;
+                            if (head == current)
+                                head = tempNode;
                             if (current->next == 0)
                                 end = current;
                         }
@@ -395,18 +385,18 @@ void LinkedList::sort()
                     else
                     {
                         prev = 0;
-                        current = headPtr;
+                        current = head;
                         changeFlag = false;
                     }
                 }
             }
         }
 
-        case 3
+        case 3:
         {
-            if (headPtr != 0)
+            if (head != 0)
             {
-                Node* current = headPtr;
+                Node* current = head;
                 Node* prev = 0;
                 Node* tempNode = 0;
                 bool changeFlag = false;
@@ -424,8 +414,8 @@ void LinkedList::sort()
                             if (prev != 0)
                                 prev->next = tempNode;
                             prev = tempNode;
-                            if (headPtr == current)
-                                headPtr = tempNode;
+                            if (head == current)
+                                head = tempNode;
                             if (current->next == 0)
                                 end = current;
                         }
@@ -440,18 +430,18 @@ void LinkedList::sort()
                     else
                     {
                         prev = 0;
-                        current = headPtr;
+                        current = head;
                         changeFlag = false;
                     }
                 }
             }
         }
 
-        case 4
+        case 4:
         {
-            if (headPtr != 0)
+            if (head != 0)
             {
-                Node* current = headPtr;
+                Node* current = head;
                 Node* prev = 0;
                 Node* tempNode = 0;
                 bool changeFlag = false;
@@ -469,8 +459,8 @@ void LinkedList::sort()
                             if (prev != 0)
                                 prev->next = tempNode;
                             prev = tempNode;
-                            if (headPtr == current)
-                                headPtr = tempNode;
+                            if (head == current)
+                                head = tempNode;
                             if (current->next == 0)
                                 end = current;
                         }
@@ -485,7 +475,7 @@ void LinkedList::sort()
                     else
                     {
                         prev = 0;
-                        current = headPtr;
+                        current = head;
                         changeFlag = false;
                     }
                 }
@@ -494,3 +484,4 @@ void LinkedList::sort()
 
     }
 }
+*/
