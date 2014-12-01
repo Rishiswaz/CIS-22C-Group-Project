@@ -17,16 +17,15 @@ Kairui
 
 1. BST
 
-Anchit
-
-1. File I/O
-1. Functions
- 1. vector<Team> readFile(string filePath);
- 1. bool writeFile(string filePath, vector<Team>);
-
 Rishabh
 
 1. Team basic structure
+1. File I/O
+1. Functions
+ 1. vector<Team> readFile(string filePath);
+ 1. bool writeFile(string filePath, vector<Team>)
+1. most of main
+
 
 Saagar
 
