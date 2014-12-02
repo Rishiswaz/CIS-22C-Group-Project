@@ -129,13 +129,14 @@ void getProjections(vector<Team> PlayoffPicture)
 	}
 
 	else
-		/**
+		/******************************
 		for (count = 0; count < NUMBER_OF_TEAMS; count++)
 		{
 		infile >> temp.getFirst();
 		}
-		**/
-		system("pause");
+		*******************************/
+		
+	system("pause");
 	system("cls");
 }
 
@@ -174,4 +175,14 @@ void printData()
 	}
 
 	
+}
+
+void printSorted()
+{
+	
+}
+
+void Update()
+{
+
 }

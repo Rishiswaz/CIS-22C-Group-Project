@@ -2,7 +2,6 @@
 
 #include "Team\Team.h"
 #include <fstream>
-#include "Team.h"
 #include <istream>
 #include <iostream>
 #include <iomanip>
@@ -11,21 +10,8 @@
 
 using namespace std;
 
-void input();
 void readDataInput();
 void Output();
-
-void input(string t, int w, int l, int y, double p, int d)
-{
-	wins = w;
-	losses = l;
-	yards = y;
-	percentage = p;
-	division = d;
-	teamName = t;
-	setRank();
-
-}
 
 void readDataInput(string inputFileName, vector<Team>& teams)
 {
@@ -45,7 +31,6 @@ while (myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> s
 	teams.push_back(dummy);
 	i += 1;
 
-	i += 1;
 };
 myfile.close(); 
 }
@@ -70,4 +55,5 @@ void Output()
 		cout << "File could not be opened." << endl;
 
 }
+
 
