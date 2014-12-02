@@ -38,13 +38,13 @@
     <ClInclude Include="HashTable\HashTableTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Team.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Implementation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fileIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Team\Team.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
