@@ -2,6 +2,7 @@
 
 #include "Team\Team.h"
 #include <fstream>
+#include "Team.h"
 #include <istream>
 #include <iostream>
 #include <iomanip>
@@ -10,29 +11,39 @@
 
 using namespace std;
 
+void input();
 void readDataInput();
 void Output();
 
+void input(string t, int w, int l, int y, double p, int d)
+{
+	wins = w;
+	losses = l;
+	yards = y;
+	percentage = p;
+	division = d;
+	teamName = t;
+	setRank();
+
+}
 
 void readDataInput(string inputFileName, vector<Team>& teams)
 {
-
-int inWins, inLosses, inYards, inPPI, inDivision;
+	int i = 0;
+int inWins, inLosses, inYards, inDivision;
 string inTeamName;
 Team dummy;
 Team inTeam;
 char separator;
+double inPercent;
 ifstream myfile;
 myfile.open(inputFileName);
-while (myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPPI >> inDivision)
+while (myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >>inPercent >>separator >>inDivision)
 {
 	
-	getline(myfile, teams, '\n');
-
-	inTeam.input(inWins, inLosses, inYards, inPPI, inDivision);
-	dummy.insertValues(inTeam, inTeamName);
+	dummy.input(inTeamName ,inWins, inLosses, inYards, inPercent, inDivision);
 	teams.push_back(dummy);
-	teams [i].key = i + 1;
+	i += 1;
 
 	i += 1;
 };
