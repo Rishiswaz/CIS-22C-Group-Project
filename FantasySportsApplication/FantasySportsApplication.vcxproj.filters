@@ -47,5 +47,8 @@
     <ClInclude Include="Team\Team.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BST\binaryTree.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -84,6 +84,7 @@
     <ClCompile Include="PlayoffPicture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BST\binaryTree.H" />
     <ClInclude Include="fileIO.h" />
     <ClInclude Include="HashTable\HashTable.h" />
     <ClInclude Include="HashTable\HashTableEntry.h" />
