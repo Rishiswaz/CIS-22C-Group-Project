@@ -61,11 +61,11 @@ bool menu(vector<Team> PlayoffPicture)
 	char choice = char();
 
 	cout << "Welcome to the Menu" << endl;
-	cout << " " << endl;
 	cout << "Press 1 to Get Projections " << endl;
-	cout << " " << endl;
-	cout << "Press 2 to Get What If " << endl;
-	cout << " " << endl;
+	cout << "Press 2 to Add and Drop a Team" << endl;
+	cout << "Press 3 to Print Teams in Sorted Order" << endl;
+	cout << "Press 4 to " << endl;
+
 
 	
 
