@@ -41,13 +41,16 @@ private:
 	int wins;
 	int losses;
 	int yards;
+	double percentage;
+	int finalScore;
+	int ppi;
 
 public:
 	/* Constructors and Destructors */
-	Node();																				// Default Constructor
-	Node(const string tName, const int w, const int l, const int y);					// Constructor with File Data parameters
-	Node(const ItemType& anItem);														// Constructor
-	Node(const ItemType& anItem, Node<ItemType>* nextNodePtr);							// Constructor
+	Node();																											// Default Constructor
+	Node(const string tName, const int w, const int l, const int y, const double per, const int fs, const int pp);	// Constructor with File Data parameters
+	Node(const ItemType& anItem);																					// Constructor
+	Node(const ItemType& anItem, Node<ItemType>* nextNodePtr);														// Constructor
 
 	/* Public Accessors and Mutators*/
 	bool readData();																	// reads data from file
@@ -66,7 +69,7 @@ class LinkedList : public ListInterface<ItemType>
 private:
 	Node<ItemType>* headPtr;															// pointer to first node; contains first entry
 	Node<ItemType>* curPtr;                                                             // pointer at current entry
-	Node<ItemType>* nullPtr;
+	Node<ItemType>* nullPtr;															// pointer to nothing
 	Node<ItemType>* getNodeAt(int position) const;										// Locates specified node in list
 	int itemCount;																		// current count of list items
 
@@ -99,17 +102,22 @@ Node<ItemType>::Node()
 	wins = 0;
 	losses = 0;
 	yards = 0;
+	percentage = 0;
+	ppi = 0;
 	next = NULL;
 }
 
 //constructor w/ file data parameters
 template<class ItemType>
-Node<ItemType>::Node(const string tName, const int w, const int l, const int y)
+Node<ItemType>::Node(const string tName, const int w, const int l, const int y, const double per, const int fs, const int pp)
 {
 	teamName = tName;
 	wins = w;
 	losses = l;
 	yards = y;
+	percentage = per;
+	finalScore = fs;
+	ppi = pp;
 	next = NULL;
 }
 
@@ -128,6 +136,9 @@ bool Node<ItemType>::readData()
 	int w;
 	int l;
 	int y;
+	double per;
+	int fs
+	int pp;
 	string file = "data.csv";
 
 	// Open input file
@@ -143,9 +154,9 @@ bool Node<ItemType>::readData()
 	Node<ItemType> *head = NULL;
 	while (!din.eof())
 	{
-		din >> tName >> w >> l >> y;
+		din >> tName >> w >> l >> y >> per >> fs >> pp;
 
-		Node<ItemType> *temp = new Node(tName, w, l, y);
+		Node<ItemType> *temp = new Node(tName, w, l, y, per, fs, pp);
 		temp->setNext(head);
 		head = temp;
 	}
@@ -185,6 +196,15 @@ Node<ItemType>* Node<ItemType>::getNext() const
 /*--------------------------------
 LinkedList Class Implementations
 --------------------------------*/
+//Need to create default constructor
+/*
+template<class ItemType>
+LinkedList<ItemType>::LinkedList() : headPtr(nullPtr), itemCount(0)
+{
+
+}
+*/
+
 //getNodeAt
 template<class ItemType>
 Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
