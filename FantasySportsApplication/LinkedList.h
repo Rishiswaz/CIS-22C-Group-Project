@@ -5,10 +5,10 @@ Linked List Implementation File
 #include<iostream>
 #include<string>
 #include<fstream>
-#include<team.h>
+#include "Team\Team.h"
 
-#indef _LINKED_LIST
-#define _LINKED_LIST
+#pragma once
+
 
 using namespace std;
 /*--------------------------------
@@ -35,6 +35,9 @@ class Node
 {
 private:
 	ItemType item;																		// data item
+	Node<ItemType>* headPtr;															// pointer to first node; contains first entry
+	Node<ItemType>* curPtr;                                                             // pointer at current entry
+	Node<ItemType>* nullPtr;															// pointer to nothing
 	Node<ItemType>* next;																// pointer to next node
 	/* File Data */
 	string teamName;
@@ -138,7 +141,7 @@ bool Node<ItemType>::readData()
 	int y;
 	double per;
 	int fs
-	int pp;
+		int pp;
 	string file = "data.csv";
 
 	// Open input file
@@ -304,204 +307,207 @@ LinkedList<ItemType>::~LinkedList()
 {
 	clear();
 }
-/*
+
 //sort
 template<class ItemType>
 void LinkedList<ItemType>::sort()
 {
-    int sortInput;
-    Node<ItemType>* head = headPtr;
+	int sortInput;
+	Node<ItemType>* head = headPtr;
 
+	cout << "Please input desired sort: " << endl;
+	cout << "(1)- Team Name" << endl;
+	cout << "(2)- Wins" << endl;
+	cout << "(3)- Losses" << endl;
+	cout << "(4)- Yards" << endl;
+	cin >> sortInput;
 
-    cout << "Please input desired sort: " << endl;
-    cout << "(1)- Team Name" << endl;
-    cout << "(2)- Wins" << endl;
-    cout << "(3)- Losses" << endl;
-    cout << "(4)- Yards" << endl;
-    cin >> sortInput;
+	switch (sortInput)
+	{
+		//Team Name Sort
+	case 1:
+	{
+			  if (head != 0)
+			  {
+				  Node* current = head;
+				  Node* prev = 0;
+				  Node* tempNode = 0;
+				  bool changeFlag = false;
+				  for (int i = 0; i < itemCount; i++)
+				  {
+					  while (current->next != 0)
+					  {
+						  tempNode = current->next;
 
-    switch(sortInput)
-    {
-        case 1:
-        {
-            if (head != 0)
-            {
-                Node* current = head;
-                Node* prev = 0;
-                Node* tempNode = 0;
-                bool changeFlag = false;
-                for (int i = 0; i < itemCount; i++)
-                {
-                    while (current->next != 0)
-                    {
-                        tempNode = current->next;
+						  if (current->teamName > tempNode->teamName)
+						  {
+							  changeFlag = true;
+							  current->next = tempNode->next;
+							  tempNode->next = current;
+							  if (prev != 0)
+								  prev->next = tempNode;
+							  prev = tempNode;
+							  if (head == current)
+								  head = tempNode;
+							  if (current->next == 0)
+								  end = current;
+						  }
+						  else
+						  {
+							  prev = current;
+							  current = current->next;
+						  }
+					  }
+					  if (changeFlag == false)
+						  break;
+					  else
+					  {
+						  prev = 0;
+						  current = head;
+						  changeFlag = false;
+					  }
+				  }
+			  }
+	}
 
-                        if (current->teamName > tempNode->teamName)
-                        {
-                            changeFlag = true;
-                            current->next = tempNode->next;
-                            tempNode->next = current;
-                            if (prev != 0)
-                                prev->next = tempNode;
-                            prev = tempNode;
-                            if (head == current)
-                                head = tempNode;
-                            if (current->next == 0)
-                                end = current;
-                        }
-                        else
-                        {
-                            prev = current;
-                            current = current->next;
-                        }
-                    }
-                    if (changeFlag == false)
-                        break;
-                    else
-                    {
-                        prev = 0;
-                        current = head;
-                        changeFlag = false;
-                    }
-                }
-            }
-        }
+		//Wins Sort
+	case 2:
+	{
+			  if (head != 0)
+			  {
+				  Node* current = head;
+				  Node* prev = 0;
+				  Node* tempNode = 0;
+				  bool changeFlag = false;
+				  for (int i = 0; i < itemCount; i++)
+				  {
+					  while (current->next != 0)
+					  {
+						  tempNode = current->next;
 
-        case 2:
-        {
-            if (head != 0)
-            {
-                Node* current = head;
-                Node* prev = 0;
-                Node* tempNode = 0;
-                bool changeFlag = false;
-                for (int i = 0; i < itemCount; i++)
-                {
-                    while (current->next != 0)
-                    {
-                        tempNode = current->next;
+						  if (current->wins > tempNode->wins)
+						  {
+							  changeFlag = true;
+							  current->next = tempNode->next;
+							  tempNode->next = current;
+							  if (prev != 0)
+								  prev->next = tempNode;
+							  prev = tempNode;
+							  if (head == current)
+								  head = tempNode;
+							  if (current->next == 0)
+								  end = current;
+						  }
+						  else
+						  {
+							  prev = current;
+							  current = current->next;
+						  }
+					  }
+					  if (changeFlag == false)
+						  break;
+					  else
+					  {
+						  prev = 0;
+						  current = head;
+						  changeFlag = false;
+					  }
+				  }
+			  }
+	}
 
-                        if (current->wins > tempNode->wins)
-                        {
-                            changeFlag = true;
-                            current->next = tempNode->next;
-                            tempNode->next = current;
-                            if (prev != 0)
-                                prev->next = tempNode;
-                            prev = tempNode;
-                            if (head == current)
-                                head = tempNode;
-                            if (current->next == 0)
-                                end = current;
-                        }
-                        else
-                        {
-                            prev = current;
-                            current = current->next;
-                        }
-                    }
-                    if (changeFlag == false)
-                        break;
-                    else
-                    {
-                        prev = 0;
-                        current = head;
-                        changeFlag = false;
-                    }
-                }
-            }
-        }
+		//Losses Sort
+	case 3:
+	{
+			  if (head != 0)
+			  {
+				  Node* current = head;
+				  Node* prev = 0;
+				  Node* tempNode = 0;
+				  bool changeFlag = false;
+				  for (int i = 0; i < itemCount; i++)
+				  {
+					  while (current->next != 0)
+					  {
+						  tempNode = current->next;
 
-        case 3:
-        {
-            if (head != 0)
-            {
-                Node* current = head;
-                Node* prev = 0;
-                Node* tempNode = 0;
-                bool changeFlag = false;
-                for (int i = 0; i < itemCount; i++)
-                {
-                    while (current->next != 0)
-                    {
-                        tempNode = current->next;
+						  if (current->losses > tempNode->losses)
+						  {
+							  changeFlag = true;
+							  current->next = tempNode->next;
+							  tempNode->next = current;
+							  if (prev != 0)
+								  prev->next = tempNode;
+							  prev = tempNode;
+							  if (head == current)
+								  head = tempNode;
+							  if (current->next == 0)
+								  end = current;
+						  }
+						  else
+						  {
+							  prev = current;
+							  current = current->next;
+						  }
+					  }
+					  if (changeFlag == false)
+						  break;
+					  else
+					  {
+						  prev = 0;
+						  current = head;
+						  changeFlag = false;
+					  }
+				  }
+			  }
+	}
 
-                        if (current->losses > tempNode->losses)
-                        {
-                            changeFlag = true;
-                            current->next = tempNode->next;
-                            tempNode->next = current;
-                            if (prev != 0)
-                                prev->next = tempNode;
-                            prev = tempNode;
-                            if (head == current)
-                                head = tempNode;
-                            if (current->next == 0)
-                                end = current;
-                        }
-                        else
-                        {
-                            prev = current;
-                            current = current->next;
-                        }
-                    }
-                    if (changeFlag == false)
-                        break;
-                    else
-                    {
-                        prev = 0;
-                        current = head;
-                        changeFlag = false;
-                    }
-                }
-            }
-        }
+		//Yards Sort
+	case 4:
+	{
+			  if (head != 0)
+			  {
+				  Node* current = head;
+				  Node* prev = 0;
+				  Node* tempNode = 0;
+				  bool changeFlag = false;
+				  for (int i = 0; i < itemCount; i++)
+				  {
+					  while (current->next != 0)
+					  {
+						  tempNode = current->next;
 
-        case 4:
-        {
-            if (head != 0)
-            {
-                Node* current = head;
-                Node* prev = 0;
-                Node* tempNode = 0;
-                bool changeFlag = false;
-                for (int i = 0; i < itemCount; i++)
-                {
-                    while (current->next != 0)
-                    {
-                        tempNode = current->next;
+						  if (current->yards > tempNode->yards)
+						  {
+							  changeFlag = true;
+							  current->next = tempNode->next;
+							  tempNode->next = current;
+							  if (prev != 0)
+								  prev->next = tempNode;
+							  prev = tempNode;
+							  if (head == current)
+								  head = tempNode;
+							  if (current->next == 0)
+								  end = current;
+						  }
+						  else
+						  {
+							  prev = current;
+							  current = current->next;
+						  }
+					  }
+					  if (changeFlag == false)
+						  break;
+					  else
+					  {
+						  prev = 0;
+						  current = head;
+						  changeFlag = false;
+					  }
+				  }
+			  }
+	}
 
-                        if (current->yards > tempNode->yards)
-                        {
-                            changeFlag = true;
-                            current->next = tempNode->next;
-                            tempNode->next = current;
-                            if (prev != 0)
-                                prev->next = tempNode;
-                            prev = tempNode;
-                            if (head == current)
-                                head = tempNode;
-                            if (current->next == 0)
-                                end = current;
-                        }
-                        else
-                        {
-                            prev = current;
-                            current = current->next;
-                        }
-                    }
-                    if (changeFlag == false)
-                        break;
-                    else
-                    {
-                        prev = 0;
-                        current = head;
-                        changeFlag = false;
-                    }
-                }
-            }
-        }
-
-    }
+	}
 }
-*/
+
