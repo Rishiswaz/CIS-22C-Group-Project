@@ -39,24 +39,24 @@ private:
 	Node<ItemType>* curPtr;                                                             // pointer at current entry
 	Node<ItemType>* nullPtr;															// pointer to nothing
 	Node<ItemType>* next;																// pointer to next node
+
 	/* File Data */
 	string teamName;
 	int wins;
 	int losses;
 	int yards;
 	double percentage;
-	int finalScore;
+	int division;
 	int ppi;
 
 public:
 	/* Constructors and Destructors */
 	Node();																											// Default Constructor
-	Node(const string tName, const int w, const int l, const int y, const double per, const int fs, const int pp);	// Constructor with File Data parameters
+	Node(const string tName, const int w, const int l, const int y, const double per, const int d, const int pp);	// Constructor with File Data parameters
 	Node(const ItemType& anItem);																					// Constructor
 	Node(const ItemType& anItem, Node<ItemType>* nextNodePtr);														// Constructor
 
 	/* Public Accessors and Mutators*/
-	bool readData();																	// reads data from file
 	void setItem(const ItemType& anItem);												// assigns data to "item" value
 	void setNext(Node<ItemType>* nextNodePtr);											// sets next pointer
 	ItemType getItem() const;															// returns data from current pointer
@@ -67,7 +67,7 @@ public:
 LinkedList Class
 --------------------------------*/
 template<class ItemType>
-class LinkedList : public ListInterface<ItemType>
+class Bucket : public ListInterface<ItemType>
 {
 private:
 	Node<ItemType>* headPtr;															// pointer to first node; contains first entry
@@ -106,20 +106,21 @@ Node<ItemType>::Node()
 	losses = 0;
 	yards = 0;
 	percentage = 0;
+	division = 0;
 	ppi = 0;
 	next = NULL;
 }
 
 //constructor w/ file data parameters
 template<class ItemType>
-Node<ItemType>::Node(const string tName, const int w, const int l, const int y, const double per, const int fs, const int pp)
+Node<ItemType>::Node(const string tName, const int w, const int l, const int y, const double per, const int d, const int pp)
 {
 	teamName = tName;
 	wins = w;
 	losses = l;
 	yards = y;
 	percentage = per;
-	finalScore = fs;
+	division = d;
 	ppi = pp;
 	next = NULL;
 }
@@ -129,43 +130,6 @@ template<class ItemType>
 Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr) : item(anItem), next(nextNodePtr)
 {
 
-}
-
-//readData
-template<class ItemType>
-bool Node<ItemType>::readData()
-{
-	string tName;
-	int w;
-	int l;
-	int y;
-	double per;
-	int fs
-		int pp;
-	string file = "data.csv";
-
-	// Open input file
-	ifstream din;
-	din.open(file.c_str());
-	if (din.fail())
-	{
-		cerr << "Could not open file: " << file << endl;
-		return false;
-	}
-
-	// Read data
-	Node<ItemType> *head = NULL;
-	while (!din.eof())
-	{
-		din >> tName >> w >> l >> y >> per >> fs >> pp;
-
-		Node<ItemType> *temp = new Node(tName, w, l, y, per, fs, pp);
-		temp->setNext(head);
-		head = temp;
-	}
-
-	din.close();
-	return true;
 }
 
 //setItem
@@ -197,7 +161,7 @@ Node<ItemType>* Node<ItemType>::getNext() const
 }
 
 /*--------------------------------
-LinkedList Class Implementations
+Bucket Class Implementations
 --------------------------------*/
 //Need to create default constructor
 /*
@@ -210,7 +174,7 @@ LinkedList<ItemType>::LinkedList() : headPtr(nullPtr), itemCount(0)
 
 //getNodeAt
 template<class ItemType>
-Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
+Node<ItemType>* Bucket<ItemType>::getNodeAt(int position) const
 {
 	Node<ItemType>* curPtr = headPtr;
 	for (int i = 1; i < position; i++)
@@ -223,7 +187,7 @@ Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
 
 //getEntry
 template<class ItemType>
-ItemType LinkedList<ItemType>::getEntry(int position) const
+ItemType Bucket<ItemType>::getEntry(int position) const
 {
 	bool ableToGet = (position >= 1) && (position <= itemCount);
 	if (ableToGet)
@@ -239,7 +203,7 @@ ItemType LinkedList<ItemType>::getEntry(int position) const
 
 //insert
 template<class ItemType>
-bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
+bool Bucket<ItemType>::insert(int newPosition, const ItemType& newEntry)
 {
 	bool ableToInsert = (newPosition >= 1) && (newPosition <= itemCount + 1);
 	if (ableToInsert)
@@ -265,7 +229,7 @@ bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 
 //remove
 template<class ItemType>
-bool LinkedList<ItemType>::remove(int position)
+bool Bucket<ItemType>::remove(int position)
 {
 	bool ableToRemove = (position >= 1) && (position <= itemCount);
 	if (ableToRemove)
@@ -295,7 +259,7 @@ bool LinkedList<ItemType>::remove(int position)
 
 //clear
 template<class ItemType>
-void LinkedList<ItemType>::clear()
+void Bucket<ItemType>::clear()
 {
 	while (!isEmpty())
 		remove(1);
@@ -303,14 +267,14 @@ void LinkedList<ItemType>::clear()
 
 //destructor
 template<class ItemType>
-LinkedList<ItemType>::~LinkedList()
+Bucket<ItemType>::~LinkedList()
 {
 	clear();
 }
 
 //sort
 template<class ItemType>
-void LinkedList<ItemType>::sort()
+void Bucket<ItemType>::sort()
 {
 	int sortInput;
 	Node<ItemType>* head = headPtr;

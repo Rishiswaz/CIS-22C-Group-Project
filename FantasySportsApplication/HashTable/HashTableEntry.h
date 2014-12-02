@@ -28,6 +28,18 @@ public:
    
    void setItem(const ItemType& item) { this->item = item; };
    void setNext(HashTableEntry<KeyType, ItemType>* next) { this->next = next; };
+
+   HashTableEntry & operator==(const HashTableEntry & SOURCE)
+   {
+	   wins = SOURCE.wins;
+	   losses = SOURCE.yards;
+	   yards = SOURCE.yards;
+	   percentage = SOURCE.percentage;
+	   PPI = SOURCE.PPI;
+	   division = SOURCE.division;
+	   percentage = SOURCE.percentage;
+	   teamName = SOURCE.teamName;
+   }
 };
 
 #endif
