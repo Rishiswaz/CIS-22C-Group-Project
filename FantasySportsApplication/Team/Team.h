@@ -13,11 +13,24 @@ public:
 	~Team();
 	//Forward declared these two functions here, placeholder until we get everything together
 	//read and update should be handled by fileIO
-	void readData(); 
+	void input(std::string t, int w, int l, int y, double p, int d)
+	{
+		wins = w;
+		losses = l;
+		yards = y;
+		percentage = p;
+		division = d;
+		teamName = t;
+		setRank();
+
+	}
 	void updateData(Team changedTeam, int addRemove);
 	//Rank manipulation
 	void changeRecord(); //used for changing W/L record.
-	void setRank(); //this will set the playoffIndexScore to position it on the Playoff Performance Index
+	void setRank()
+	{
+		PPI = yards*percentage;
+	}//this will set the playoffIndexScore to position it on the Playoff Performance Index
 					//use this after changing any values or updating any data
 	//V-overloaded = operator defined inline (rhs: Right Hand Side)-V
 	Team & operator=(const Team & rhs) 
@@ -37,13 +50,13 @@ private:
 	int wins, losses, yards, PPI, division;
 	double percentage;
 	std::string teamName;
-	bool inFilter; //bool flag to see if it is within bounds of the applied filters
+	
 };
 
 Team::Team()
 {
 	//Input from file
-	inFilter = true; //to make sure that if no query filters are applied that it still appears in the list
+	
 }
 
 Team::~Team()
