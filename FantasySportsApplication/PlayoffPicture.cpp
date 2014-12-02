@@ -19,11 +19,13 @@ int PlayoffPicture;
 
 void playoffTeams(); 
 
-bool menu(vector<Team> PlayoffPicture);
+void menu(vector<Team> PlayoffPicture);
 
 void getProjections(vector<Team> PlayoffPicture);
 
-void whatIf();
+void Update();
+
+void printSorted();
 
 //int printProjections();
 
@@ -38,7 +40,10 @@ int func1()
 
 	playoffTeams();
 
-	while (menu(PlayoffPicture)){}
+	menu(PlayoffPicture);
+
+	getProjections(PlayoffPicture);
+	printData();
 
 	system("pause");
 	system("cls");
@@ -54,7 +59,7 @@ void playoffTeams()
 	system("cls");
 }
 
-bool menu(vector<Team> PlayoffPicture)
+void menu(vector<Team> PlayoffPicture)
 {
 
 	bool flag = bool();
@@ -62,7 +67,7 @@ bool menu(vector<Team> PlayoffPicture)
 
 	cout << "Welcome to the Menu" << endl;
 	cout << "Press 1 to Get Projections " << endl;
-	cout << "Press 2 to Add and Drop a Team" << endl;
+	cout << "Press 2 to Update Teams" << endl;
 	cout << "Press 3 to Print Teams in Sorted Order" << endl;
 	cout << "Press 4 to " << endl;
 
@@ -80,7 +85,7 @@ bool menu(vector<Team> PlayoffPicture)
 			flag = true;
 		break;
 	case'2':
-		whatIf();
+		Update();
 		flag = true;
 		break;
 	default:
@@ -89,9 +94,17 @@ bool menu(vector<Team> PlayoffPicture)
 		system("pause");
 		system("cls");
 		break;
+	case '3':
+		printSorted();
+		flag = true;
+		break;
+	case '4':
+
+		flag = true;
+		break;
 	}// End Switch Statement
 
-	return flag;
+	
 }
 
 void getProjections(vector<Team> PlayoffPicture)
@@ -116,22 +129,14 @@ void getProjections(vector<Team> PlayoffPicture)
 	}
 
 	else
-		/***
+		/**
 		for (count = 0; count < NUMBER_OF_TEAMS; count++)
 		{
 		infile >> temp.getFirst();
 		}
 		**/
-	system("pause");
+		system("pause");
 	system("cls");
-
-}
-
-void whatIf()
-{
-
-
-
 }
 
 
@@ -144,7 +149,7 @@ void printData()
 	cout << "" << endl;
 
 	cout << "1 Print Projections" << endl;
-	cout << "2 What If?" << endl;
+	cout << "2 Update" << endl;
 
 	cin >> choice;
 		system("cls");
