@@ -2,10 +2,11 @@
 #include<conio.h>
 #include<stack>
 #include<queue>
+#include "Team\Team.h"
 #ifndef BINSTREE
 #define BINSTREE
 using namespace std;
-typedef int valuetype;
+typedef Team valuetype;
 class Node{
   public:
          valuetype data;

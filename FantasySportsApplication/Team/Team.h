@@ -14,7 +14,7 @@ public:
 	//Forward declared these two functions here, placeholder until we get everything together
 	//read and update should be handled by fileIO
 	void readData(); 
-	void updateData();
+	void updateData(Team changedTeam, int addRemove);
 	//Rank manipulation
 	void changeRecord(); //used for changing W/L record.
 	void setRank(); //this will set the playoffIndexScore to position it on the Playoff Performance Index
@@ -27,13 +27,17 @@ public:
 		losses = rhs.yards;
 		yards = rhs.yards;
 		percentage=rhs.percentage;
+		PPI = rhs.PPI;
+		division = rhs.division;
+		percentage = rhs.percentage;
+		teamName = rhs.teamName;
 	};
 private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
-	int wins, losses, yards, percentage;
+	int wins, losses, yards, PPI, division;
+	double percentage;
 	std::string teamName;
 	bool inFilter; //bool flag to see if it is within bounds of the applied filters
-	int playoffIndexScore; //use for BST key
 };
 
 Team::Team()
