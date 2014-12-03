@@ -113,7 +113,24 @@ public:
 	}
 	void changeVals(int choice, int val)
 	{
-
+		switch (choice)
+		{
+		case 1: yards += val;
+			break;
+		case 2: yards -= val;
+			break;
+		case 3: wins += val;
+			break;
+		case 4: wins -= val;
+			break;
+		case 5: losses += val;
+			break;
+		case 6: losses -= val;
+			;
+			break;
+		default:
+			break;
+		}
 	};
 private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
