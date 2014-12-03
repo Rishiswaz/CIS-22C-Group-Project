@@ -97,8 +97,7 @@ void implementation()
 	binarytree::CBinaryTree<int>	 wTree;
 	binarytree::CBinaryTree<int>	 lTree;
 	binarytree::CBinaryTree<int>	 ppiTree;
-	binarytree::CBinaryTree<char>	 nTree;
-	binarytree::CBinaryTree<double>  pTree;
+	binarytree::CBinaryTree<int>	 nTree;
 	//end BSTs
 
 	std::string stringInput;
