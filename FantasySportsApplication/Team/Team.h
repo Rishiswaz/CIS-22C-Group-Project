@@ -10,6 +10,7 @@ class Team
 {
 public:
 	Team();
+	Team(std::string, int, int, int, double, int);
 	~Team();
 	//to access private member yards for the key for the hash table
 	int keyOutput()
@@ -140,6 +141,15 @@ private:
 	
 };
 
+Team::Team(std::string name, int win, int loss, int yard, double percent, int div)
+{
+	teamName = name;
+	wins = win;
+	losses = loss;
+	yards = yard;
+	percentage = percent;
+	division = div;
+}
 Team::Team()
 {
 	//Input from file

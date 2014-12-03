@@ -90,5 +90,27 @@ void addMenu()
 				<< std::endl
 				<< "Likewise You MUST Remove A Team Before You Can Add A New One"
 				<< std::endl;
-	std::cout << "Please Select a Team to Remove" << std::endl;	
+	std::cout << "Please Select a Team to Remove" << std::endl;
+	std::cout << "Please select a Team to Add" << std::endl;
+}
+
+void displayTeams()
+{
+	vector <Team> teams;
+	std::string namestr= "Denver Broncos";
+	Team dummy1(namestr, 9, 3, 4967, 0.75, 8);
+	teams.push_back(dummy1);
+	namestr = "Indianapolis Colts";
+	Team dummy2(namestr,8, 4, 5259, 0.667, 7);
+	teams.push_back(dummy2);
+	namestr = "Indianapolis Colts";
+	Team dummy2(namestr, 8, 4, 5259, 0.667, 7);
+	teams.push_back(dummy2);
+	
+	//New_England_Patriots,9,3,4565,0.75,6
+
+
+
+
+
 }
