@@ -24,9 +24,6 @@
     <ClCompile Include="HashTable\HashTableTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayoffPicture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTable\HashTable.h">
@@ -45,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Team\Team.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BST\binaryTree.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,11 +13,7 @@
 
 using namespace std;
 
-const int NUMBER_OF_TEAMS = 32;
-
-int PlayoffPicture;
-
-void playoffTeams(); 
+const int NUMBER_OF_TEAMS = 32; 
 
 void menu(vector<Team> PlayoffPicture);
 
@@ -38,7 +34,6 @@ int func1()
 
 	vector<Team> PlayoffPicture;
 
-	playoffTeams();
 
 	menu(PlayoffPicture);
 

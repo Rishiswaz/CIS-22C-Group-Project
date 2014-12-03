@@ -81,7 +81,6 @@
   <ItemGroup>
     <ClCompile Include="FantasySportsApplication.cpp" />
     <ClCompile Include="HashTable\HashTableTest.cpp" />
-    <ClCompile Include="PlayoffPicture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST\binaryTree.H" />

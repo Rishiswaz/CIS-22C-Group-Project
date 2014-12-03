@@ -4,7 +4,7 @@
 
 
 int main(int argc, const char * argv []) {
-	testHashTable();
+	//testHashTable();
 	return 0;
 
 }

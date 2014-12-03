@@ -11,8 +11,7 @@ class Team
 public:
 	Team();
 	~Team();
-	//Forward declared these two functions here, placeholder until we get everything together
-	//read and update should be handled by fileIO
+	//to access private members or this class from fileIO
 	void input(std::string t, int w, int l, int y, double p, int d)
 	{
 		wins = w;
@@ -22,9 +21,7 @@ public:
 		division = d;
 		teamName = t;
 		setRank();
-
 	}
-	void updateData(Team changedTeam, int addRemove);
 	std::string getDiv()
 	{
 		std::string returnValue;
