@@ -5,8 +5,9 @@
 
 int main(int argc, const char * argv []) {
 	//testHashTable();
-	displayTeams();
-	//implementation();
+	vector<Team> teamList;
+	//displayTeams(teamList);
+	implementation(teamList);
 	system("PAUSE");
 	return 0;
 

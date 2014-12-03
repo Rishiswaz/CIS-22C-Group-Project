@@ -132,8 +132,16 @@ public:
 			break;
 		default:
 			break;
-		}
+		};
 	};
+	void editStuff(int win, int loss, std::string name)
+	{
+		wins = win;
+		losses = loss;
+		teamName = name;
+		percentage = win / loss;
+		setRank();
+	}
 private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
 	int wins, losses, yards, PPI, division,stringASCII;
@@ -160,4 +168,3 @@ Team::Team()
 Team::~Team()
 {
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
