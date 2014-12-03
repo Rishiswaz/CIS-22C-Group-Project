@@ -80,7 +80,10 @@ public:
 			<< "In"<<dt.getDiv()<< "with a PPI of "<< dt.PPI;
 		return os;
 	}
+	void changeVals(int choice, int val)
+	{
 
+	};
 private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
 	int wins, losses, yards, PPI, division;

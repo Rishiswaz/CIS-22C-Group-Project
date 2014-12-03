@@ -22,11 +22,43 @@ void buildHash(vector<Team> teams, HashTable<int, Team> &hashTable)
 		hashTable.add(teams[i].keyOutput('y'), teams[i]);
 	}
 }
-void mainMenueImp(int choice)
+void editMenueImp(Team editTeam, int choice)
 {
+	int intInput;
+	char charInput;
+	std::cout << std::endl;
+	std::cout << "Please Enter How Much you want to change the value" << std::endl;
+	std::cin >> intInput;
+	editTeam.changeVals(choice, intInput);
+	std::cout << "Do You Want To Change Another Value? [Y/n]" << std::endl;
+	std::cin >> charInput;
+	if (charInput == 'y' || charInput == 'Y')
+	{
+		std::cout << "Which one?" << std::endl;
+		std::cin >> intInput;
+		editMenueImp(editTeam, intInput);
+	}
+	else if (charInput != 'n' || charInput != 'N')
+	{
+		std::cout << "You Entered an invalid input, the default file name will be used" << std::endl;
+	}
+}
+
+
+void mainMenueImp(int choice, vector<Team> teams)
+{
+	int intChoice;
 	switch (choice)
 	{
 	case 1:
+		for (int i = 0; i < 32; i++)
+		{
+			std::cout<< i+1 <<")  " << teams[i]<<std::endl;
+		};
+		std::cout << "Please Enter The Team You Want to Edit";
+		std::cin >> intChoice;
+		intChoice -= 1;
+		editMenueImp(teams[intChoice], editMenu());
 		break;
 	case 2:
 		break;
@@ -62,5 +94,5 @@ void implementation()
 	landingPage();
 	readDataInput(inputFilePrompt(), teams);
 	buildHash(teams, hashTable);
-	mainMenueImp(mainMenu());
+	mainMenueImp(mainMenu(), teams);
 }

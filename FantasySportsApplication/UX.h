@@ -56,11 +56,29 @@ int mainMenu()
 	system("CLS");
 	std::cout << std::setw(15) << "PPP Main Menu" << std::endl;
 	std::cout
-		<< "1) Edit Current Value" << std::endl
+		<< "1) Edit Current Teams" << std::endl
 		<< "2) Add or Remove a Team" << std::endl
 		<< "3) Display Teams" << std::endl
 		<< "4) Who Will Make The Playoffs?" << std::endl
 		<< "5) Quit" << std::endl;
 	std::cin >> retVal;
+	return retVal;
+}
 
+int editMenu()
+{
+	int retVal;
+	system("CLS");
+	std::cout	<< std::setw(15) << "Edit Current Teams" << std::endl;
+	std::cout	<< "Please Select an operation to perform on the selected team" << std::endl;
+	std::cout	<< "1) Add Yards" <<std::endl
+				<< "2) Sub Yards"<<std::endl
+				<< "3) Add Wins"<<std::endl
+				<< "4) Sub Wins"<<std::endl
+				<< "5) Add Losses"<<std::endl
+				<< "6) Sub Losses"<<std::endl
+				<< std::endl;
+	std::cin >> retVal;
+	return retVal;
+	;
 }
