@@ -5,7 +5,9 @@
 
 int main(int argc, const char * argv []) {
 	//testHashTable();
-	implementation();
+	displayTeams();
+	//implementation();
+	system("PAUSE");
 	return 0;
 
 }
