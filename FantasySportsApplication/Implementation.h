@@ -43,6 +43,18 @@ void editMenueImp(Team editTeam, int choice)
 		std::cout << "You Entered an invalid input, the default file name will be used" << std::endl;
 	}
 }
+void addMenuImp(vector<Team> teams, HashTable<int, Team> &hashTable)
+{
+	int intChoice;
+
+	for (int i = 0; i < 32; i++)
+	{
+		std::cout << i + 1 << ")  " << teams[i] << std::endl;
+	};
+	std::cout << "Please Enter The Team You Want to Edit";
+	std::cin >> intChoice;
+	
+}
 
 
 void mainMenueImp(int choice, vector<Team> teams)

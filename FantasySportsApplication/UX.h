@@ -82,3 +82,13 @@ int editMenu()
 	return retVal;
 	;
 }
+void addMenu()
+{
+	system("CLS");
+	std::cout	<< std::setw(15) << "Add/Remove Team Menu" << std::endl;
+	std::cout	<< "PLEASE NOTE: In Order To Keep NFL Playoff Structure intact if you add a team you MUST remove one"
+				<< std::endl
+				<< "Likewise You MUST Remove A Team Before You Can Add A New One"
+				<< std::endl;
+	std::cout << "Please Select a Team to Remove" << std::endl;	
+}
