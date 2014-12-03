@@ -31,14 +31,10 @@ public:
 
    HashTableEntry & operator==(const HashTableEntry & SOURCE)
    {
-	   wins = SOURCE.wins;
-	   losses = SOURCE.yards;
-	   yards = SOURCE.yards;
-	   percentage = SOURCE.percentage;
-	   PPI = SOURCE.PPI;
-	   division = SOURCE.division;
-	   percentage = SOURCE.percentage;
-	   teamName = SOURCE.teamName;
+	   if (SOURCE.key == key)
+		   return true;
+	   else
+		   return false;
    }
 };
 

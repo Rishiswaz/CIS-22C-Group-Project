@@ -78,9 +78,9 @@ private:
 
 public:
 	/* Constructors and Destructors */
-	LinkedList();																		// Default Constructor
-	LinkedList(const LinkedList<ItemType>& aList);										// Copy Constructor
-	virtual ~LinkedList();																// Destructor
+	Bucket();																		// Default Constructor
+	Bucket(const Bucket<ItemType>& aList);										// Copy Constructor
+	virtual ~Bucket();																// Destructor
 
 	/* ListInterface Functions */
 	bool isEmpty();																		// sees if list is empty
@@ -267,7 +267,7 @@ void Bucket<ItemType>::clear()
 
 //destructor
 template<class ItemType>
-Bucket<ItemType>::~LinkedList()
+Bucket<ItemType>::~Bucket()
 {
 	clear();
 }

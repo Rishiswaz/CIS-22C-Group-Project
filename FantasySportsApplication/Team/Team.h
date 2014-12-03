@@ -64,14 +64,16 @@ public:
 	Team & operator=(const Team & rhs) 
 	{
 //LHS (destination)    =     RHS (source)
-		wins = rhs.wins;
-		losses = rhs.yards;
-		yards = rhs.yards;
-		percentage=rhs.percentage;
-		PPI = rhs.PPI;
-		division = rhs.division;
-		percentage = rhs.percentage;
-		teamName = rhs.teamName;
+		Team dummy;
+		dummy.wins = rhs.wins;
+		dummy.losses = rhs.yards;
+		dummy.yards = rhs.yards;
+		dummy.percentage = rhs.percentage;
+		dummy.PPI = rhs.PPI;
+		dummy.division = rhs.division;
+		dummy.percentage = rhs.percentage;
+		dummy.teamName = rhs.teamName;
+		return dummy;
 	};
 	friend std::ostream& operator<<(std::ostream& os, Team& dt)
 	{

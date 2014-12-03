@@ -370,4 +370,5 @@ void HashTable<KeyType, ItemType>::allocateArray()
 	   hashTable[i] = nullptr;
    }
 }
+
 #endif
