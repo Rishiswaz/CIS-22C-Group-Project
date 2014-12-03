@@ -24,11 +24,12 @@ char separator;
 double inPercent;
 ifstream myfile;
 myfile.open(inputFileName);
-while (myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >>inPercent >>separator >>inDivision)
+for (int i = 0; i < 32; i++)
 {	
+	myfile.getline(inTeamName, 256, ',');
+	myfile >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
 	dummy.input(inTeamName ,inWins, inLosses, inYards, inPercent, inDivision);
 	teams.push_back(dummy);
-	i += 1;
 };
 myfile.close(); 
 }

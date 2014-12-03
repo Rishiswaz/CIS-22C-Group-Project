@@ -5,6 +5,7 @@
 
 int main(int argc, const char * argv []) {
 	//testHashTable();
+	implementation();
 	return 0;
 
 }
