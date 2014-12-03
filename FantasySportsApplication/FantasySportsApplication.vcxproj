@@ -91,6 +91,7 @@
     <ClInclude Include="Implementation.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Team\Team.h" />
+    <ClInclude Include="UX.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

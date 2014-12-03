@@ -11,6 +11,8 @@ class Team
 public:
 	Team();
 	~Team();
+	//to access private member yards for the key for the hash table
+	int keyOutput(char keyVal){ return yards; };
 	//to access private members or this class from fileIO
 	void input(std::string t, int w, int l, int y, double p, int d)
 	{
