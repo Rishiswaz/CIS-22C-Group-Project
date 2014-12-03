@@ -21,7 +21,7 @@ std::string inputFilePrompt()
 {
 	system("CLS");
 	char charInput;
-	std::string inputName = "Data.csv";
+	std::string inputName = "data.csv";
 	std::cout << "The default input file is data.csv, would you like to enter a different data file? [Y/n]"
 		<< std::endl;
 	std::cin >> charInput;
