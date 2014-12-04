@@ -21,9 +21,6 @@
     <ClCompile Include="FantasySportsApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HashTable\HashTableTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTable\HashTable.h">

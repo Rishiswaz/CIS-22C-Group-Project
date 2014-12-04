@@ -80,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FantasySportsApplication.cpp" />
-    <ClCompile Include="HashTable\HashTableTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST\binaryTree.H" />
