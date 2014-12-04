@@ -16,7 +16,7 @@
 
 
 
-void displayTeams(vector<Team> teams);
+
 std::string inputFilePrompt()
 {
 	system("CLS");
@@ -82,35 +82,21 @@ int editMenu()
 	return retVal;
 	;
 }
-void addMenu(vector<Team>& teams)
+void addMenu()
 {
 	system("CLS");
-	displayTeams(teams);
-	int inputVal;
-	std::string inString = "";
-	int inWin, inLose, inDiv;
-	std::cout << std::setw(15) << "Add/Remove Team Menu" << std::endl;
-	std::cout << "PLEASE NOTE: In Order To Keep NFL Playoff Structure intact if you add a team you MUST remove one"
-		<< std::endl
-		<< "Likewise You MUST Remove A Team Before You Can Add A New One"
-		<< std::endl
-		<< "A New Team Must Stay in the Division the team it is replacing was from";
-	std::cout << "Please Select a Team to Remove " << std::endl;
-	cin >> inputVal;
-	inputVal -= 1;
-	std::cout << "Please enter team values to add " << std::endl;
-	std::cout << "name: " << std::endl;
-	
-	std::cout << std::endl << "wins: ";
-	cin >> inWin;
-	std::cout << std::endl << "Losses: ";
-	cin >> inLose;
-	teams[inputVal].editStuff(inWin, inLose, inString);
-
+	std::cout	<< std::setw(15) << "Add/Remove Team Menu" << std::endl;
+	std::cout	<< "PLEASE NOTE: In Order To Keep NFL Playoff Structure intact if you add a team you MUST remove one"
+				<< std::endl
+				<< "Likewise You MUST Remove A Team Before You Can Add A New One"
+				<< std::endl;
+	std::cout << "Please Select a Team to Remove" << std::endl;
+	std::cout << "Please select a Team to Add" << std::endl;
 }
 
-void createTeams(vector<Team> &teams)
+void displayTeams()
 {
+	vector <Team> teams;
 	std::string namestr= "Denver Broncos";
 	Team dummy1(namestr, 9, 3, 4967, 0.75, 8);
 	teams.push_back(dummy1);
@@ -211,15 +197,7 @@ void createTeams(vector<Team> &teams)
 	for (int j = 0; j < teams.size(); j++)
 	{
 		teams[j].setRank();
-	}
-
-}
-
-void displayTeams(vector<Team> teams)
-{
-	for (int j = 0; j < teams.size(); j++)
-	{
-		//teams[j].setRank();
 		cout << teams[j];
 	}
+
 }

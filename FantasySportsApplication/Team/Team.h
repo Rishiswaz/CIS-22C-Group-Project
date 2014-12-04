@@ -78,6 +78,7 @@ public:
 		//Rank manipulation
 		void setRank()
 		{
+<<<<<<< HEAD
 			double value;
 			value = yards*percentage;
 			trunc(value);
@@ -149,6 +150,31 @@ public:
 		double percentage;
 		std::string  teamName;
 	}
+=======
+		case 1: yards += val;
+			break;
+		case 2: yards -= val;
+			break;
+		case 3: wins += val;
+			break;
+		case 4: wins -= val;
+			break;
+		case 5: losses += val;
+			break;
+		case 6: losses -= val;
+			;
+			break;
+		default:
+			break;
+		}
+	};
+private:
+	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
+	int wins, losses, yards, PPI, division,stringASCII;
+	double percentage;
+	std::string teamName;
+	
+>>>>>>> parent of f8684c0... God Save The Queen
 };
 
 Team::Team(std::string name, int win, int loss, int yard, double percent, int div)
@@ -169,3 +195,4 @@ Team::Team()
 Team::~Team()
 {
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
