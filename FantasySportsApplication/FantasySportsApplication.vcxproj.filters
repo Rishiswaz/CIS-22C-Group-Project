@@ -21,6 +21,9 @@
     <ClCompile Include="FantasySportsApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HashTable\HashTableTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTable\HashTable.h">
@@ -38,9 +41,6 @@
     <ClInclude Include="fileIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Team\Team.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BST\binaryTree.H">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Team\Team.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
