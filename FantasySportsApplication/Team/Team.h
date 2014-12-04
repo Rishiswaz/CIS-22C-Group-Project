@@ -18,7 +18,7 @@ public:
 		return yards;
 	}
 	
-	int keyOutput(char keyVal)
+	auto keyOutput(char keyVal)
 	{
 		switch (keyVal)
 		{
@@ -28,7 +28,7 @@ public:
 			break;
 		case 'p':return PPI;
 			break;
-		case 'n':return getASCII();
+		case 'n':return teamName;
 			break;
 		default:
 			std::cout << "An error occured parsing your input, default key will be used" << std::endl;
