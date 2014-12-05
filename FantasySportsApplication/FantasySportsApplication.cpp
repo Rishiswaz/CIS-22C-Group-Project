@@ -5,6 +5,7 @@
 
 int main(int argc, const char * argv []) {
 	implementation();
+	__noop;
 	system("PAUSE");
 	return 0;
 
