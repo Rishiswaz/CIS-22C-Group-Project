@@ -42,11 +42,10 @@ else
 myfile.close(); 
 }
 
-void Output()
+void Output(vector<Team> teams)
 {
 	ofstream outputFile;
 	outputFile.open("Output.txt");
-	Team array[32];
 
 	if (outputFile.is_open())
 	{
@@ -54,9 +53,9 @@ void Output()
 
 		for (int i = 0; i < 32; i++)
 		{
-			outputFile << array[i];
+			outputFile << teams[i]<<std::endl;
 		}
-		cout << "Array data successfully saved into the file Output.txt" << endl;
+		cout << "Team data successfully saved into the file Output.txt" << endl;
 	}
 	else 
 		cout << "File could not be opened." << endl;

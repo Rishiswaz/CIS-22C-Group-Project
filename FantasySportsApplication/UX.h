@@ -105,17 +105,8 @@ auto displayTeams(vector<Team>teams)
 		<< std::endl;
 	std::cin >> charInput;
 	std::cout << std::endl;
-	if (charInput == 'y' || charInput == 'Y')
-	{
-		return 1;
-	}
-	else if (charInput != 'n' || charInput != 'N')
-	{
-		for (int i = 0; i <= 31;i++)
-			std::cout<<teams[i]<<std::endl<<std::endl
-			<<"You will be Returned to the main menu"<<std::endl;
-		return 0;
-	}
+
+	if (charInput!= 'y'&& charInput!='Y' && charInput!='n'&&charInput!='N')
 	std::cerr << "You Entered An Invalid Option, you will be returned to the main menu" << std::endl;
 	return 0;
 	

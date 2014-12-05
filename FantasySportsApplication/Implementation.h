@@ -64,6 +64,7 @@ void addMenuImp(vector<Team> teams, HashTable<int, Team> &hashTable)
 
 void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable)
 {
+	char charInput=' ';
 	int intChoice;
 	if (choice == 0)
 		choice = mainMenu();
@@ -72,17 +73,17 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 	case 1:
 		for (int i = 0; i < 32; i++)
 		{
-			std::cout<< i+1 <<")  " << teams[i]<<std::endl;
+			std::cout << i + 1 << ")  " << teams[i] << std::endl;
 		};
 		std::cout << "Please Enter The Team You Want to Edit";
 		std::cin >> intChoice;
 		intChoice -= 1;
 		editMenueImp(teams[intChoice], editMenu());
 		break;
-	case 2: 
+	case 2:
 		system("PAUSE");
-		intChoice = displayTeams(teams);
-		switch (intChoice)
+		
+		switch (displayTeams(teams))
 		{
 
 		default:
@@ -93,14 +94,33 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		break;
 	case 4:
 		break;
-	case 5: std::cout<<"There was a load factor of " <<hashTable.getLoad()<<" in this instance "<< std::endl;
+	case 5:
+		system("CLS");
+		std::cout << "There was a load factor of " << hashTable.getLoad() << " in this instance " << std::endl;
 		std::cout << "Please note: due to the structure of the NFL and a set amount of teams the load factor will be 1 barring any errors in the amount of teams" << std::endl;
+		system("PAUSE");
+		mainMenueImp(0, teams, hashTable);
 		break;
-	case 6: break;
+	case 6:
+		std::cout << "Are You Sure You Want To Exit?" << std::endl;
+		std::cin >> charInput;
+		if (charInput != 'n' || charInput != 'N')
+		{
+			std::cout << "Do You Want To Output any changes to a text file? [Y/n]" << std::endl;
+			std::cin >> charInput;
+			if (charInput == 'y' || charInput == 'Y')
+			{
+				Output(teams);
+			}
+		}
+		std::cout << "Goodbye";
+		system("PAUSE");
+			break;
 	default:
 		break;
+		}
 	}
-}
+
 
 
 void implementation()
