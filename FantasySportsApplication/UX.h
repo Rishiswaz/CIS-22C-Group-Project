@@ -111,13 +111,18 @@ auto displayTeams(vector<Team>teams)
 	std::cout << std::endl;
 	if (charInput == 'y' || charInput == 'Y')
 	{
-		for (int i = 0; i <= teams.size(); i++)
-			std::cout << teams[i] << std::endl;
+		return 1;
+	}
+	else if (charInput == 'n' || charInput == 'N')
+	{
+		for (int i = 0; i <= 31; i++)
+		{
+			std::cout << teams[i] << std::endl << std::endl;
+			
+		}
 		system("PAUSE");
 		return 0;
 	}
-	else if (charInput == 'n' || charInput == 'N')
-		return 1;
 	if (charInput!= 'y'&& charInput!='Y' && charInput!='n'&&charInput!='N')
 	std::cerr << "You Entered An Invalid Option, you will be returned to the main menu" << std::endl;
 	system("PAUSE");

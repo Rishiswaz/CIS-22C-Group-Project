@@ -78,6 +78,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		std::cin >> intChoice;
 		intChoice -= 1;
 		editMenueImp(teams[intChoice], editMenu());
+		mainMenueImp(0, teams, hashTable);
 		break;
 	case 2:
 		system("PAUSE");
@@ -102,7 +103,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 6:
-		std::cout << "Are You Sure You Want To Exit?" << std::endl;
+		std::cout << "Are You Sure You Want To Exit? [Y/n]" << std::endl;
 		std::cin >> charInput;
 		if (charInput != 'n' || charInput != 'N')
 		{
@@ -113,8 +114,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 				Output(teams);
 			}
 		}
-		std::cout << "Goodbye";
-		system("PAUSE");
+		std::cout << "Goodbye" << std::endl;
 			break;
 	default:
 		break;
@@ -130,6 +130,8 @@ void sortedOutputImp(int displayTeamsIn, vector<Team>& teams, HashTable<int, Tea
 
 	switch (displayTeamsIn)
 	{
+	case 0: mainMenueImp(0, teams, hashTable);
+		break;
 	case 1:
 		switch (treeSelection())
 		{
@@ -145,7 +147,6 @@ void sortedOutputImp(int displayTeamsIn, vector<Team>& teams, HashTable<int, Tea
 		break;
 	}
 }
-
 
 
 void implementation()
@@ -165,6 +166,7 @@ void implementation()
 	buildHash(teams, hashTable);
 	mainMenueImp(mainMenu(), teams, hashTable);
 }
+
 
 void buildTree(vector<Team> teams, CBinaryTree& tree)
 {
