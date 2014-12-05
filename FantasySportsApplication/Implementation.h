@@ -62,7 +62,7 @@ void addMenuImp(vector<Team> teams, HashTable<int, Team> &hashTable)
 }
 
 
-void mainMenueImp(int choice, vector<Team> teams)
+void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable)
 {
 	int intChoice;
 	if (choice == 0)
@@ -93,7 +93,10 @@ void mainMenueImp(int choice, vector<Team> teams)
 		break;
 	case 4:
 		break;
-	case 5: break;
+	case 5: std::cout<<"There was a load factor of " <<hashTable.getLoad()<<" in this instance "<< std::endl;
+		std::cout << "Please note: due to the structure of the NFL and a set amount of teams the load factor will be 1 barring any errors in the amount of teams" << std::endl;
+		break;
+	case 6: break;
 	default:
 		break;
 	}
@@ -102,7 +105,7 @@ void mainMenueImp(int choice, vector<Team> teams)
 
 void implementation()
 {
-	HashTable<int, Team> hashTable(37);
+	HashTable<int, Team> hashTable;
 	vector<Team> teams;
 	char charInput;
 	int intInput;
@@ -115,7 +118,7 @@ void implementation()
 
 	readDataInput(inputFilePrompt(), teams);
 	buildHash(teams, hashTable);
-	mainMenueImp(mainMenu(), teams);
+	mainMenueImp(mainMenu(), teams, hashTable);
 }
 
 void buildTree(vector<Team> teams, binarytree::CBinaryTree<int>& tree)
@@ -159,7 +162,7 @@ void sortedOutputImp(int displayTeamsIn,vector<Team>& teams, HashTable<int,Team>
 	case 1:
 		switch (treeSelection())
 			{
-		case 0: mainMenueImp(0, teams);
+		case 0: mainMenueImp(0, teams, hashTable);
 			break;
 		case 1:  buildTree(teams, yTree);
 				

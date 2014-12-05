@@ -61,7 +61,8 @@ int mainMenu()
 		<< "2) Add or Remove a Team" << std::endl
 		<< "3) Display Teams" << std::endl
 		<< "4) Who Will Make The Playoffs?" << std::endl
-		<< "5) Quit" << std::endl;
+		<< "5) Efficency" << std::endl
+		<< "6) Quit" << std::endl;
 	std::cin >> retVal;
 	return retVal;
 }

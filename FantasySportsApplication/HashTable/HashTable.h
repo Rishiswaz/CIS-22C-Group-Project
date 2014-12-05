@@ -21,7 +21,7 @@ private:
    HashTableEntry<KeyType, ItemType>** hashTable;
    int itemCount;
    int hashTableSize;
-   static const int DEFAULT_SIZE = 101;
+   static const int DEFAULT_SIZE = 32;
    
 public:
    HashTable();
@@ -37,8 +37,10 @@ public:
    int size() const;
    void clear();
    bool contains(const KeyType& key) const;
-   void traverse(void visit(ItemType&)) const;
-   
+   auto traverse(void visit(ItemType&)) const;
+   auto getLoad();
+   static void loadDummy(ItemType&) { return void; };
+
    class NotFoundException { };
 private:
    int getHashIndex(const KeyType& key) const;
@@ -326,8 +328,10 @@ bool HashTable<KeyType, ItemType>::contains(const KeyType& key) const
  @return none
  */
 template <class KeyType, class ItemType>
-void HashTable<KeyType, ItemType>::traverse(void visit(ItemType&)) const
+auto HashTable<KeyType, ItemType>::traverse(void visit(ItemType&)) const
 {
+	
+
    for (int i = 0; i < hashTableSize; i++) {      
       HashTableEntry<KeyType, ItemType> *curPtr = hashTable[i];
       
@@ -336,7 +340,30 @@ void HashTable<KeyType, ItemType>::traverse(void visit(ItemType&)) const
          visit(item);
          curPtr = curPtr->getNext();
       }
+	  
    }
+   
+}
+
+template<class KeyType, class ItemType>
+inline auto HashTable<KeyType, ItemType>::getLoad()
+{
+	ItemType dummy;
+	int sizeOf = size();
+	int elemsIn=0;
+	for (int i = 0; i < hashTableSize; i++) {
+		HashTableEntry<KeyType, ItemType> *curPtr = hashTable[i];
+
+		while (curPtr != nullptr) {
+			ItemType item = curPtr->getItem();
+			curPtr = curPtr->getNext();
+		}
+		elemsIn += 1;
+	}
+	auto retVal = elemsIn / sizeOf;
+	std::cout << "There were: " << elemsIn << " in a hash table with a size of " << sizeOf << std::endl;
+	
+	return retVal;
 }
 
 /*
