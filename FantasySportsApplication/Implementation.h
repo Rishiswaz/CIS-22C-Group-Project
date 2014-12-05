@@ -14,7 +14,7 @@
 #include <ostream>
 #include <strstream>
 
-
+auto displayMenuImp(int);
 void buildHash(vector<Team> teams, HashTable<int, Team> &hashTable)
 {
 	for (int i = 0; i < 32; i++)
