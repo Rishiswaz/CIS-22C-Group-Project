@@ -5,7 +5,7 @@
 #include "HashTable\HashTableTest.h"
 #include "LinkedList.h"
 #include "Team\Team.h"
-#include "BST\binaryTree.h"
+#include "BST_nT.h"
 #include "fileIO.h"
 #include "UX.h"
 #include <vector>
@@ -14,7 +14,8 @@
 #include <ostream>
 #include <strstream>
 int treeSelection();
-void sortedOutputImp(int,vector<Team>, HashTable<int,Team>);
+void buildTree(vector<Team> teams, CBinaryTree& tree);
+void sortedOutputImp(int displayTeamsIn, vector<Team>& teams, HashTable<int, Team> &hashTable);
 void displayMenuImp(int passedVal)
 {
 	std::cout << "did something?" << std::endl;
@@ -60,8 +61,6 @@ void addMenuImp(vector<Team> teams, HashTable<int, Team> &hashTable)
 	std::cin >> intChoice;
 	
 }
-
-
 void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable)
 {
 	char charInput=' ';
@@ -91,6 +90,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		}
 		break;
 	case 3:
+		sortedOutputImp(displayTeams(teams), teams, hashTable);
 		break;
 	case 4:
 		break;
@@ -120,6 +120,31 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		break;
 		}
 	}
+void sortedOutputImp(int displayTeamsIn, vector<Team>& teams, HashTable<int, Team> &hashTable)
+{
+
+
+
+	vector<Team> outPutVec;
+	CBinaryTree tree;
+
+	switch (displayTeamsIn)
+	{
+	case 1:
+		switch (treeSelection())
+		{
+		case 0: mainMenueImp(0, teams, hashTable);
+			break;
+		case 1:  buildTree(teams, tree);
+			tree.inorderTree(tree.root);
+			break;
+		default:
+			break;
+		}
+	default:
+		break;
+	}
+}
 
 
 
@@ -141,12 +166,11 @@ void implementation()
 	mainMenueImp(mainMenu(), teams, hashTable);
 }
 
-void buildTree(vector<Team> teams, binarytree::CBinaryTree<int>& tree)
+void buildTree(vector<Team> teams, CBinaryTree& tree)
 {
 	for (int i = 0; i <= 31; i++)
 	{
-
-		tree.insertElement(teams[i].keyOutput('y'));
+		tree.insertNode(teams[i].keyOutput('y'), teams[i]);
 	};
 }
 
@@ -164,33 +188,3 @@ int treeSelection()
 	return selection;
 }
 
-void sortedOutputImp(int displayTeamsIn,vector<Team>& teams, HashTable<int,Team> hashTable)
-{
-
-	//all the BSTs
-	binarytree::CBinaryTree<int>	 yTree;
-	binarytree::CBinaryTree<int>	 wTree;
-	binarytree::CBinaryTree<int>	 lTree;
-	binarytree::CBinaryTree<int>	 ppiTree;
-	binarytree::CBinaryTree<int>	 nTree;
-	//end BSTs
-	vector<Team> outPutVec;
-
-
-	switch (displayTeamsIn)
-	{
-	case 1:
-		switch (treeSelection())
-			{
-		case 0: mainMenueImp(0, teams, hashTable);
-			break;
-		case 1:  buildTree(teams, yTree);
-				
-				break;
-			default:
-				break;
-			}
-	default:
-		break;
-	}
-}

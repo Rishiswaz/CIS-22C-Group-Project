@@ -53,5 +53,8 @@
     <ClInclude Include="Team\Team.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BST_nT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

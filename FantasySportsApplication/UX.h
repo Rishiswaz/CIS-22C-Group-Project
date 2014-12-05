@@ -21,7 +21,8 @@ std::string inputFilePrompt()
 {
 	system("CLS");
 	char charInput;
-	std::string inputName = "data.csv";
+	std::string inputName;
+	std::string defaultName = "data.csv";
 	std::cout << "The default input file is data.csv, would you like to enter a different data file? [Y/n]"
 		<< std::endl;
 	std::cin >> charInput;
@@ -30,12 +31,15 @@ std::string inputFilePrompt()
 		std::cout << "Please enter the datafile you would like to use."
 			<< " Keep in mind that it must be a .csv file with the same format as the default input."
 			<< std::endl;
+		cin.ignore();
 		getline(cin, inputName);
+		system("PAUSE");
 	}
 	else if (charInput != 'n' || charInput != 'N')
 	{
 		std::cout << "Moving on to program, default data file being used." << std::endl;
 		system("PAUSE");
+		return defaultName;
 	}
 	return inputName;
 }
@@ -105,9 +109,20 @@ auto displayTeams(vector<Team>teams)
 		<< std::endl;
 	std::cin >> charInput;
 	std::cout << std::endl;
-
+	if (charInput == 'y' || charInput == 'Y')
+	{
+		for (int i = 0; i <= teams.size(); i++)
+			std::cout << teams[i] << std::endl;
+		system("PAUSE");
+		return 0;
+	}
+	else if (charInput == 'n' || charInput == 'N')
+		return 1;
 	if (charInput!= 'y'&& charInput!='Y' && charInput!='n'&&charInput!='N')
 	std::cerr << "You Entered An Invalid Option, you will be returned to the main menu" << std::endl;
+	system("PAUSE");
 	return 0;
 	
 }
+
+

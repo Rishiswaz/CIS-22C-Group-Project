@@ -28,7 +28,7 @@ public:
 			break;
 		case 'p':return PPI;
 			break;
-		case 'n':return getASCII();
+		case 'n':return nameToInt();
 			break;
 		case 'y': return yards;
 		default:
@@ -105,13 +105,16 @@ public:
 			<< "In the "<<dt.getDiv()<< " with a PPI of "<< dt.PPI<<std::endl;
 		return os;
 	}
-	int getASCII()
+	int nameToInt()
 	{
 		stringASCII = 0;
-		for (int i = 0; i < teamName.length(); i++)
+		stringASCII = int(teamName.at(0));
+		int size = teamName.length() - 1;
+		for (int i = 1; i <=size; i++)
 		{
-			stringASCII += int(teamName.at(i));
-		}
+			if (teamName.at(i) == ' ')
+				stringASCII = int(teamName.at(i + 1));
+		};
 		return stringASCII;
 	}
 	void changeVals(int choice, int val)
