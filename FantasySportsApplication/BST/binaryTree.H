@@ -1,5 +1,7 @@
 #ifndef __BINARYTREE_H__
 #define __BINARYTREE_H__
+#include <string>
+#include <strstream>
 namespace binarytree
 {
 	template<typename Element>
@@ -80,12 +82,16 @@ namespace binarytree
 	template<typename Element>
 	void CBinaryTree<Element>::inorderTree(CTreeNode<Element> *root)
 	{
+		
+	
 		if (root != NULL)
 		{
 			inorderTree(root->lchild);
-			cout << root->key << endl;
+			cout << root->key << " ";
 			inorderTree(root->rchild);
 		}
+		
+		
 	}
 	template<typename Element>
 	CTreeNode<Element> * CBinaryTree<Element>::search(Element value)

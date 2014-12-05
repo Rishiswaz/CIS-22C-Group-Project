@@ -65,6 +65,8 @@ void addMenuImp(vector<Team> teams, HashTable<int, Team> &hashTable)
 void mainMenueImp(int choice, vector<Team> teams)
 {
 	int intChoice;
+	if (choice == 0)
+		choice = mainMenu();
 	switch (choice)
 	{
 	case 1:
@@ -110,34 +112,27 @@ void implementation()
 	std::string stringInput;
 	
 	landingPage();
+
 	readDataInput(inputFilePrompt(), teams);
 	buildHash(teams, hashTable);
 	mainMenueImp(mainMenu(), teams);
 }
 
-binarytree::CBinaryTree<int> buildTree(int key, vector<Team> teams)
+void buildTree(vector<Team> teams, binarytree::CBinaryTree<int>& tree)
 {
-	binarytree::CBinaryTree<int> tree;
 	for (int i = 0; i <= 31; i++)
 	{
 
 		tree.insertElement(teams[i].keyOutput('y'));
 	};
-	return tree;
-}
-
-
-vector<int> sortedKeys(binarytree::CBinaryTree<int> tree)
-{
-	vector<int> retval;
-	return retval;
 }
 
 int treeSelection()
 {
 	int selection;
 	std::cout << "Please Select Which Value you would like to sort by" << std::endl;
-	std::cout << "1)Yards" << std::endl 
+	std::cout 
+		<< "1)Yards" << std::endl 
 		<< "2)Wins" << std::endl 
 		<< "3)Losses" <<std::endl 
 		<< "4)PPI" << std::endl 
@@ -146,7 +141,7 @@ int treeSelection()
 	return selection;
 }
 
-void sortedOutputImp(int displayTeamsIn,vector<Team> teams, HashTable<int,Team> hashTable)
+void sortedOutputImp(int displayTeamsIn,vector<Team>& teams, HashTable<int,Team> hashTable)
 {
 
 	//all the BSTs
@@ -164,7 +159,10 @@ void sortedOutputImp(int displayTeamsIn,vector<Team> teams, HashTable<int,Team> 
 	case 1:
 		switch (treeSelection())
 			{
-			case 1:
+		case 0: mainMenueImp(0, teams);
+			break;
+		case 1:  buildTree(teams, yTree);
+				
 				break;
 			default:
 				break;
