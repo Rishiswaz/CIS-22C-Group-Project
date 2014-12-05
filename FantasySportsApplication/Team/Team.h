@@ -79,6 +79,7 @@ public:
 	{
 		double value;
 		value = yards*percentage;
+		PPI = value;
 
 	}//this will set the playoffIndexScore to position it on the Playoff Performance Index
 					//use this after changing any values or updating any data
@@ -99,8 +100,8 @@ public:
 	};
 	friend std::ostream& operator<<(std::ostream& os, Team& dt)
 	{
-		os << dt.teamName << " " << dt.wins << " Wins, " << dt.losses << "Losses, " << std::endl
-			<< "In"<<dt.getDiv()<< "with a PPI of "<< dt.PPI;
+		os << dt.teamName << " " << dt.wins << " Wins, " << dt.losses <<  " Losses, " << std::endl
+			<< "In the "<<dt.getDiv()<< " with a PPI of "<< dt.PPI<<std::endl;
 		return os;
 	}
 	int getASCII()

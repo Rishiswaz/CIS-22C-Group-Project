@@ -28,7 +28,7 @@ myfile.open(inputFileName);
 //myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
 for (int i = 0; i <= 31; i++)
 {	
-	myfile >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
+	myfile >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision>>separator;
 	std::getline(myfile, inTeamName);
 	//cin.ignore('/n');
 	dummy.input(inTeamName ,inWins, inLosses, inYards, inPercent, inDivision);

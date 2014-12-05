@@ -94,9 +94,22 @@ void addMenu()
 	std::cout << "Please select a Team to Add" << std::endl;
 }
 
-void displayTeams()
+void displayTeams(vector<Team>teams)
 {
-	vector <Team> teams;
+	char charInput= ' ';
+	std::cout << "Do you want to order the input? [Y/n]"
+		<< std::endl;
+	if (charInput == 'y' || charInput == 'Y')
+	{
+		std::cout << "Please Select the sort order."<<std::endl;
+	}
+	else if (charInput != 'n' && charInput != 'N')
+	{
+		for (int i = 0; i <= 31;i++)
+			std::cout<<teams[i];
+	}
+	
+	/*vector <Team> teams;
 	std::string namestr= "Denver Broncos";
 	Team dummy1(namestr, 9, 3, 4967, 0.75, 8);
 	teams.push_back(dummy1);
@@ -199,5 +212,5 @@ void displayTeams()
 		teams[j].setRank();
 		cout << teams[j];
 	}
-
+	*/
 }
