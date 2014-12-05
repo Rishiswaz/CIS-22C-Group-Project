@@ -25,15 +25,21 @@ double inPercent;
 ifstream myfile;
 myfile.open(inputFileName);
 
-//myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
-for (int i = 0; i <= 31; i++)
-{	
-	myfile >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision>>separator;
-	std::getline(myfile, inTeamName);
-	//cin.ignore('/n');
-	dummy.input(inTeamName ,inWins, inLosses, inYards, inPercent, inDivision);
-	teams.push_back(dummy);
-};
+if (myfile.good())
+{
+	for (int i = 0; i <= 31; i++)
+	{
+		myfile >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision >> separator;
+		std::getline(myfile, inTeamName);
+		//cin.ignore('/n');
+		dummy.input(inTeamName, inWins, inLosses, inYards, inPercent, inDivision);
+		teams.push_back(dummy);
+	};
+}
+else
+{
+	std::cout << "There was an error opening the file"<<std::endl;
+}
 myfile.close(); 
 }
 
