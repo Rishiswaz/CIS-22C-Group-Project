@@ -101,15 +101,16 @@ auto displayTeams(vector<Team>teams)
 	char charInput= ' ';
 	std::cout << "Do you want to order the input? [Y/n]"
 		<< std::endl;
+	std::cin >> charInput;
 	if (charInput == 'y' || charInput == 'Y')
 	{
 		std::cout << "Please Select the sort order."<<std::endl;
 		return 1;
 	}
-	else if (charInput != 'n' && charInput != 'N')
+	else if (charInput != 'n' || charInput != 'N')
 	{
 		for (int i = 0; i <= 31;i++)
-			std::cout<<teams[i];
+			std::cout<<teams[i]<<std::endl;
 		return 2;
 	}
 	std::cerr << "You Entered An Invalid Option" << std::endl;

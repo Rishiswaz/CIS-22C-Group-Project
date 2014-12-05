@@ -76,7 +76,9 @@ void mainMenueImp(int choice, vector<Team> teams)
 		intChoice -= 1;
 		editMenueImp(teams[intChoice], editMenu());
 		break;
-	case 2: intChoice = displayTeams(teams);
+	case 2: 
+		system("PAUSE");
+		intChoice = displayTeams(teams);
 		switch (intChoice)
 		{
 
