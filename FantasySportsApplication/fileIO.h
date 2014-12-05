@@ -15,7 +15,6 @@ void Output();
 
 void readDataInput(string inputFileName, vector<Team>& teams)
 {
-	int i = 0;
 int inWins, inLosses, inYards, inDivision;
 string inTeamName;
 Team dummy;

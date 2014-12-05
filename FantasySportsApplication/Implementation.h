@@ -13,7 +13,8 @@
 #include <fstream>
 #include <ostream>
 #include <strstream>
-
+int treeSelection();
+void sortedOutputImp(int,vector<Team>, HashTable<int,Team>);
 void displayMenuImp(int passedVal)
 {
 	std::cout << "did something?" << std::endl;
@@ -104,13 +105,7 @@ void implementation()
 	char charInput;
 	int intInput;
 	
-	//all the BSTs
-	binarytree::CBinaryTree<int>	 yTree;
-	binarytree::CBinaryTree<int>	 wTree;
-	binarytree::CBinaryTree<int>	 lTree;
-	binarytree::CBinaryTree<int>	 ppiTree;
-	binarytree::CBinaryTree<int>	 nTree;
-	//end BSTs
+
 
 	std::string stringInput;
 	
@@ -120,3 +115,61 @@ void implementation()
 	mainMenueImp(mainMenu(), teams);
 }
 
+binarytree::CBinaryTree<int> buildTree(int key, vector<Team> teams)
+{
+	binarytree::CBinaryTree<int> tree;
+	for (int i = 0; i <= 31; i++)
+	{
+
+		tree.insertElement(teams[i].keyOutput('y'));
+	};
+	return tree;
+}
+
+
+vector<int> sortedKeys(binarytree::CBinaryTree<int> tree)
+{
+	vector<int> retval;
+	return retval;
+}
+
+int treeSelection()
+{
+	int selection;
+	std::cout << "Please Select Which Value you would like to sort by" << std::endl;
+	std::cout << "1)Yards" << std::endl 
+		<< "2)Wins" << std::endl 
+		<< "3)Losses" <<std::endl 
+		<< "4)PPI" << std::endl 
+		<< "5)Name" << std::endl;
+	std::cin >> selection;
+	return selection;
+}
+
+void sortedOutputImp(int displayTeamsIn,vector<Team> teams, HashTable<int,Team> hashTable)
+{
+
+	//all the BSTs
+	binarytree::CBinaryTree<int>	 yTree;
+	binarytree::CBinaryTree<int>	 wTree;
+	binarytree::CBinaryTree<int>	 lTree;
+	binarytree::CBinaryTree<int>	 ppiTree;
+	binarytree::CBinaryTree<int>	 nTree;
+	//end BSTs
+	vector<Team> outPutVec;
+
+
+	switch (displayTeamsIn)
+	{
+	case 1:
+		switch (treeSelection())
+			{
+			case 1:
+				break;
+			default:
+				break;
+			}
+	default:
+		break;
+	}
+}

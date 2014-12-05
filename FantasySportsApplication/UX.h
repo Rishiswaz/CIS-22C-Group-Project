@@ -34,7 +34,7 @@ std::string inputFilePrompt()
 	}
 	else if (charInput != 'n' || charInput != 'N')
 	{
-		std::cout << "You Entered an invalid input, the default file name will be used" << std::endl;
+		std::cout << "Moving on to program, default data file being used." << std::endl;
 		system("PAUSE");
 	}
 	return inputName;
@@ -106,7 +106,6 @@ auto displayTeams(vector<Team>teams)
 	std::cout << std::endl;
 	if (charInput == 'y' || charInput == 'Y')
 	{
-		std::cout << "Please Select the sort order."<<std::endl;
 		return 1;
 	}
 	else if (charInput != 'n' || charInput != 'N')

@@ -30,6 +30,7 @@ public:
 			break;
 		case 'n':return getASCII();
 			break;
+		case 'y': return yards;
 		default:
 			std::cout << "An error occured parsing your input, default key will be used" << std::endl;
 			break;
