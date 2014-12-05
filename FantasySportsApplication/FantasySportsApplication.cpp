@@ -10,7 +10,8 @@ int main(int argc, const char * argv []) {
 	vector<Team> teams;
 	std::string fileName = "data.csv";
 	readDataInput(fileName, teams);
-	std::cout << teams[0] << std::endl << teams[31];
+	//std::cout << teams[0] << std::endl << teams[31];
+	displayTeams(teams);
 	system("PAUSE");
 	return 0;
 

@@ -94,21 +94,26 @@ void addMenu()
 	std::cout << "Please select a Team to Add" << std::endl;
 }
 
-void displayTeams(vector<Team>teams)
+//BIG NOTE!!! PLEASE READ for this class please if you are not using C++14 put "-> int" after the input parameters
+auto displayTeams(vector<Team>teams)
 {
+	//uses C++14 function definition, please read the comment above the function definition for proper C++11 syntax
 	char charInput= ' ';
 	std::cout << "Do you want to order the input? [Y/n]"
 		<< std::endl;
 	if (charInput == 'y' || charInput == 'Y')
 	{
 		std::cout << "Please Select the sort order."<<std::endl;
+		return 1;
 	}
 	else if (charInput != 'n' && charInput != 'N')
 	{
 		for (int i = 0; i <= 31;i++)
 			std::cout<<teams[i];
+		return 0;
 	}
-	
+	std::cerr << "You Entered An Invalid Option" << std::endl;
+	return 0;
 	/*vector <Team> teams;
 	std::string namestr= "Denver Broncos";
 	Team dummy1(namestr, 9, 3, 4967, 0.75, 8);
