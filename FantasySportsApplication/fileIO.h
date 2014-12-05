@@ -19,16 +19,18 @@ void readDataInput(string inputFileName, vector<Team>& teams)
 int inWins, inLosses, inYards, inDivision;
 string inTeamName;
 Team dummy;
-Team inTeam;
+//Team inTeam;
 char separator;
 double inPercent;
 ifstream myfile;
 myfile.open(inputFileName);
 
-myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
-for (int i = 0; i < 32; i++)
+//myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
+for (int i = 0; i <= 31; i++)
 {	
-	myfile >> inTeamName >> separator >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
+	myfile >> inWins >> separator >> inLosses >> separator >> inYards >> separator >> inPercent >> separator >> inDivision;
+	std::getline(myfile, inTeamName);
+	//cin.ignore('/n');
 	dummy.input(inTeamName ,inWins, inLosses, inYards, inPercent, inDivision);
 	teams.push_back(dummy);
 };
