@@ -14,7 +14,10 @@
 #include <ostream>
 #include <strstream>
 
-auto displayMenuImp(int);
+void displayMenuImp(int passedVal)
+{
+	std::cout << "did something?" << std::endl;
+};
 void buildHash(vector<Team> teams, HashTable<int, Team> &hashTable)
 {
 	for (int i = 0; i < 32; i++)
@@ -38,9 +41,10 @@ void editMenueImp(Team editTeam, int choice)
 		std::cin >> intInput;
 		editMenueImp(editTeam, intInput);
 	}
-	else if (charInput != 'n' || charInput != 'N')
+	else if (charInput != 'n' && charInput != 'N')
 	{
-		std::cout << "You Entered an invalid input, the default file name will be used" << std::endl;
+		std::cout << "You Entered an invalid input" << std::endl;
+
 	}
 }
 void addMenuImp(vector<Team> teams, HashTable<int, Team> &hashTable)
@@ -72,7 +76,13 @@ void mainMenueImp(int choice, vector<Team> teams)
 		intChoice -= 1;
 		editMenueImp(teams[intChoice], editMenu());
 		break;
-	case 2:
+	case 2: intChoice = displayTeams(teams);
+		switch (intChoice)
+		{
+
+		default:
+			break;
+		}
 		break;
 	case 3:
 		break;
@@ -107,3 +117,4 @@ void implementation()
 	buildHash(teams, hashTable);
 	mainMenueImp(mainMenu(), teams);
 }
+

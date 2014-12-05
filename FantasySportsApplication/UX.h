@@ -110,7 +110,7 @@ auto displayTeams(vector<Team>teams)
 	{
 		for (int i = 0; i <= 31;i++)
 			std::cout<<teams[i];
-		return 0;
+		return 2;
 	}
 	std::cerr << "You Entered An Invalid Option" << std::endl;
 	return 0;
