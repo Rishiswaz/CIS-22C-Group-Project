@@ -205,3 +205,46 @@ void exit(vector<Team> teams)
 	}
 	std::cout << "Goodbye" << std::endl;
 }
+
+vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
+{
+	vector<Team> bracket;
+	vector<Team> bracketAFC;
+	vector<Team> bracketNFC;
+	vector<Team> North;
+	vector<Team> East;
+	vector<Team> South;
+	vector<Team> West;
+	vector<Team> temp;
+	Team test;
+	int divScalar;
+
+	bool done;
+
+		//NFC Playoff bracket
+		for (int i = 0; i <= 31; i++)
+		{
+			if (teams[i].getDivVal() == 1)
+			{
+				North.push_back(teams[i]);
+			}
+			else if (teams[i].getDivVal() == 2)
+			{
+				East.push_back(teams[i]);
+			}
+			else if (teams[i].getDivVal() ==3)
+			{
+				South.push_back(teams[i]);
+			}
+			else if (teams[i].getDivVal() == 4)
+			{
+				West.push_back(teams[i]);
+			}
+		}
+
+		for (int i = 0; i <= 5; i++)
+		{
+
+		}
+	
+}

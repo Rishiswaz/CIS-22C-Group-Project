@@ -48,6 +48,10 @@ public:
 		teamName = t;
 		setRank();
 	}
+	int getDivVal()
+	{
+		return division;
+	}
 	std::string getDiv()
 	{
 		std::string returnValue;
