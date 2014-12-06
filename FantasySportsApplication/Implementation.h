@@ -14,7 +14,7 @@
 #include <ostream>
 #include <strstream>
 vector<Team> getDivTeams(vector<Team> teams, int inDiv);
-void exit(vector<Team> teams);
+int exit(vector<Team> teams);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
 void buildTree(vector<Team> teams, CBinaryTree& tree);
@@ -70,6 +70,11 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 	int intChoice;
 	if (choice == 0)
 		choice = mainMenu();
+	else if (choice == 7)
+	{
+		system ("CLS");
+		std::cout << "Goodbye" << std::endl;
+	}
 	switch (choice)
 	{
 	case 1:
@@ -106,7 +111,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 6:
-		exit(teams);
+		mainMenueImp(exit(teams), teams, hashTable);
 			break;
 	default:
 		break;
@@ -190,21 +195,34 @@ void efficeincies(vector<Team> teams, HashTable<int,Team> hashTable)
 	system("PAUSE");
 }
 
-void exit(vector<Team> teams)
+int exit(vector<Team> teams)
 {
 	char charInput;
+	int retVal=7;
 	std::cout << "Are You Sure You Want To Exit? [Y/n]" << std::endl;
 	std::cin >> charInput;
-	if (charInput != 'n' || charInput != 'N')
+	if (charInput == 'n' || charInput == 'N')
 	{
+		system("CLS");
+		retVal = 0;;
+	}
+	 else if (charInput == 'y' || charInput != 'Y')
+	{
+
 		std::cout << "Do You Want To Output any changes to a text file? [Y/n]" << std::endl;
 		std::cin >> charInput;
 		if (charInput == 'y' || charInput == 'Y')
 		{
 			Output(teams);
 		}
-	}
-	std::cout << "Goodbye" << std::endl;
+	} 
+	 else
+	 {
+		 retVal = 6;
+		 std::cout << "you entered an invalid input" << std::endl;
+		 system("PAUSE");
+	 }
+	return retVal;
 }
 
 vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
