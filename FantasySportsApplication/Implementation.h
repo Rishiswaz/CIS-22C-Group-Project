@@ -17,7 +17,7 @@ void exit(vector<Team> teams);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
 void buildTree(vector<Team> teams, CBinaryTree& tree);
-void sortedOutputImp(int displayTeamsIn, vector<Team>& teams, HashTable<int, Team> &hashTable);
+void sortedOutputImp(int displayTeamsIn, vector<Team> teams, HashTable<int, Team> &hashTable);
 void displayMenuImp(int passedVal)
 {
 	std::cout << "did something?" << std::endl;
@@ -95,6 +95,8 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 	case 3:
 		system("CLS");
 		sortedOutputImp(displayTeams(teams), teams, hashTable);
+		system("PAUSE");
+		mainMenueImp(0, teams, hashTable);
 		break;
 	case 4:
 		break;
@@ -109,7 +111,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		break;
 		}
 	}
-void sortedOutputImp(int displayTeamsIn, vector<Team>& teams, HashTable<int, Team> &hashTable)
+void sortedOutputImp(int displayTeamsIn, vector<Team> teams, HashTable<int, Team> &hashTable)
 {
 
 
