@@ -13,6 +13,7 @@
 #include <fstream>
 #include <ostream>
 #include <strstream>
+vector<Team> getDivTeams(vector<Team> teams, int inDiv);
 void exit(vector<Team> teams);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
@@ -211,40 +212,50 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 	vector<Team> bracket;
 	vector<Team> bracketAFC;
 	vector<Team> bracketNFC;
-	vector<Team> North;
-	vector<Team> East;
-	vector<Team> South;
-	vector<Team> West;
+	vector<Team> currDiv;
 	vector<Team> temp;
 	Team test;
-	int divScalar;
-
+	int currPPI, testPPI, divScalar = 0;
 	bool done;
 
-		//NFC Playoff bracket
-		for (int i = 0; i <= 31; i++)
+
+	for (int i = 1; i <= 4; i++)
+	{
+		//NFC Playoff bracket no wildcard
+		currDiv = getDivTeams(teams, i);
+		for (int i = 0; i <= 3; i++)
 		{
-			if (teams[i].getDivVal() == 1)
+			divScalar += currDiv[i].keyOutput('p');
+		}
+		divScalar /= 4000;
+		test = currDiv[0];
+		for (int j = 1; j <= 3; j++)
+		{
+			testPPI = test.keyOutput('p');
+			testPPI *= divScalar;
+			currPPI = currDiv[j].keyOutput('p');
+			currPPI *= divScalar;
+			if (currPPI > testPPI)
 			{
-				North.push_back(teams[i]);
-			}
-			else if (teams[i].getDivVal() == 2)
-			{
-				East.push_back(teams[i]);
-			}
-			else if (teams[i].getDivVal() ==3)
-			{
-				South.push_back(teams[i]);
-			}
-			else if (teams[i].getDivVal() == 4)
-			{
-				West.push_back(teams[i]);
+				test = currDiv[j];
 			}
 		}
+		bracketNFC.push_back(test);
+	}
+	return bracket;
+}
 
-		for (int i = 0; i <= 5; i++)
+
+vector<Team> getDivTeams(vector<Team> teams, int inDiv)
+{
+	vector<Team> retVal;
+
+	for (int i = 0; i <= 31; i++)
+	{
+		if (teams[i].getDivVal() == inDiv)
 		{
-
+			retVal.push_back(teams[i]);
 		}
-	
+	}
+	return retVal;
 }
