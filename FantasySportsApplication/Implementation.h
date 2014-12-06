@@ -13,6 +13,8 @@
 #include <fstream>
 #include <ostream>
 #include <strstream>
+void exit(vector<Team> teams);
+void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
 void buildTree(vector<Team> teams, CBinaryTree& tree);
 void sortedOutputImp(int displayTeamsIn, vector<Team>& teams, HashTable<int, Team> &hashTable);
@@ -74,7 +76,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		{
 			std::cout << i + 1 << ")  " << teams[i] << std::endl;
 		};
-		std::cout << "Please Enter The Team You Want to Edit";
+		std::cout << "Please Enter The Team You Want to Edit"<<std::endl;
 		std::cin >> intChoice;
 		intChoice -= 1;
 		editMenueImp(teams[intChoice], editMenu());
@@ -91,30 +93,17 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		}
 		break;
 	case 3:
+		system("CLS");
 		sortedOutputImp(displayTeams(teams), teams, hashTable);
 		break;
 	case 4:
 		break;
 	case 5:
-		system("CLS");
-		std::cout << "There was a load factor of " << hashTable.getLoad() << " in this instance " << std::endl;
-		std::cout << "Please note: due to the structure of the NFL and a set amount of teams the load factor will be 1 barring any errors in the amount of teams" << std::endl;
-		system("PAUSE");
+		efficeincies(teams, hashTable);
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 6:
-		std::cout << "Are You Sure You Want To Exit? [Y/n]" << std::endl;
-		std::cin >> charInput;
-		if (charInput != 'n' || charInput != 'N')
-		{
-			std::cout << "Do You Want To Output any changes to a text file? [Y/n]" << std::endl;
-			std::cin >> charInput;
-			if (charInput == 'y' || charInput == 'Y')
-			{
-				Output(teams);
-			}
-		}
-		std::cout << "Goodbye" << std::endl;
+		exit(teams);
 			break;
 	default:
 		break;
@@ -190,3 +179,27 @@ int treeSelection()
 	return selection;
 }
 
+void efficeincies(vector<Team> teams, HashTable<int,Team> hashTable)
+{
+	system("CLS");
+	std::cout << "There was a load factor of " << hashTable.getLoad() << " in this instance " << std::endl;
+	std::cout << "Please note: due to the structure of the NFL and a set amount of teams the load factor will be 1 barring any errors in the amount of teams" << std::endl;
+	system("PAUSE");
+}
+
+void exit(vector<Team> teams)
+{
+	char charInput;
+	std::cout << "Are You Sure You Want To Exit? [Y/n]" << std::endl;
+	std::cin >> charInput;
+	if (charInput != 'n' || charInput != 'N')
+	{
+		std::cout << "Do You Want To Output any changes to a text file? [Y/n]" << std::endl;
+		std::cin >> charInput;
+		if (charInput == 'y' || charInput == 'Y')
+		{
+			Output(teams);
+		}
+	}
+	std::cout << "Goodbye" << std::endl;
+}
