@@ -223,9 +223,9 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 	{
 		//NFC Playoff bracket no wildcard
 		currDiv = getDivTeams(teams, i);
-		for (int i = 0; i <= 3; i++)
+		for (int k = 0; k <= 3; k++)
 		{
-			divScalar += currDiv[i].keyOutput('p');
+			divScalar += currDiv[k].keyOutput('p');
 		}
 		divScalar /= 4000;
 		test = currDiv[0];
@@ -242,6 +242,11 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 		}
 		bracketNFC.push_back(test);
 	}
+	for (int i = 0; i <= 31; i++)
+	{
+
+	}
+
 	return bracket;
 }
 
