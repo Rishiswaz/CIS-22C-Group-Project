@@ -67,6 +67,7 @@ void addMenuImp(vector<Team> teams, HashTable<int, Team> &hashTable)
 }
 void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable)
 {
+	vector<Team> playoffTeams;
 	char charInput=' ';
 	int intChoice;
 	if (choice == 0)
@@ -106,6 +107,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 4:
+		playoffTeams = playoffBracket(teams, hashTable);
 		break;
 	case 5:
 		efficeincies(teams, hashTable);
@@ -290,11 +292,12 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 			}
 		}
 		bracketNFC.push_back(test);
-	
 	}
 	//get NFC wild cards
 	getWildCards(currConf, bracketNFC);
-	reorderVec(bracketNFC);
+	//reorderVec(bracketNFC);
+
+
 	for (int i = 0; i <= 31; i++)
 	{
 		if (temp[i].getDivVal() == 5 || temp[i].getDivVal() == 4 || temp[i].getDivVal() == 6 || temp[i].getDivVal() == 7)
@@ -303,6 +306,36 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 		}
 	}
 
+	for (int i = 5; i <= 8; i++)
+	{
+		//AFC Playoff bracket no wildcard
+		currDiv = getDivTeams(teams, i);
+		for (int k = 0; k <= 3; k++)
+		{
+			divScalar += currDiv[k].keyOutput('p');
+		}
+		divScalar /= 4000;
+
+		test = currDiv[0];
+		pos = 0;
+		for (int j = 1; j <= 3; j++)
+		{
+			test.scaledPPI(divScalar);
+			currDiv[j].scaledPPI(divScalar);
+			if (currDiv[j] > test)
+			{
+				test = currDiv[j];
+				pos = j;
+			}
+		}
+		bracketNFC.push_back(test);
+	}
+	//get AFC wild cards
+	getWildCards(currConf, bracketAFC);
+
+	std::cout << bracketAFC.size() << std::endl;
+	std::cout << bracketNFC.size() << std::endl;
+	__noop;
 	return bracket;
 }
 
