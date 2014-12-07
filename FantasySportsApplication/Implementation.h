@@ -13,8 +13,9 @@
 #include <fstream>
 #include <ostream>
 #include <strstream>
-vector<Team> getDivTeams(vector<Team> teams, int inDiv);
+vector<Team> getDivTeams(vector<Team> teams, int inDiv, int& divScalar);
 int exit(vector<Team> teams);
+vector<Team> playoffBracket(vector<Team> teams);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
 void getWildCards(vector<Team>, vector<Team>&);
@@ -107,7 +108,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 4:
-		playoffTeams = playoffBracket(teams, hashTable);
+		playoffTeams = playoffBracket(teams);
 		break;
 	case 5:
 		efficeincies(teams, hashTable);
@@ -230,34 +231,39 @@ int exit(vector<Team> teams)
 
 void reorderVec(vector<Team>& teams)
 {
-	int size = teams.size() - 1;
-	Team test = teams[0], tempTeam;
-	for (int i = 1; i <= size; i++)
+	Team temp = teams[0];
+	int pos=0;
+
+	for (int i = 0; i < teams.size(); i++) 
 	{
-		if (teams[i] > test)
+		pos = i;
+		for (int j = 1; j < teams.size(); j++) 
 		{
-			tempTeam = teams[i-1];
-			teams[i - 1] = teams[i];
-			teams[i] = tempTeam;
-			test = teams[i - 1];
-			i -= 2;
+			if (teams[j] < teams[pos])
+				pos = j;
 		}
+		temp = teams[i];
+		teams[i] = teams[pos];
+		teams[pos] = temp;
+		std::cout << i << "reorder counter" << std::endl;
 	}
+
+		
+	
 }
 
 
-vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
+vector<Team> playoffBracket(vector<Team> teams)
 {
 	vector<Team> bracket;
 	vector<Team> bracketAFC;
 	vector<Team> bracketNFC;
 	vector<Team> currDiv;
 	vector<Team> currConf;
-	vector<Team> temp;
-	Team test;
-	int pos, divScalar = 0;
+	vector<Team> temp= teams;
+	
+	int pos=0, divScalar = 0;
 
-	temp = teams;
 	reorderVec(temp);
 	//GET NFC
 	for (int i = 0; i <= 31; i++)
@@ -266,38 +272,49 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 		{
 			currConf.push_back(temp[i]);
 		}
+		
 	}
 
-
+	Team test;
 	for (int i = 1; i <= 4; i++)
 	{
 		//NFC Playoff bracket no wildcard
-		currDiv = getDivTeams(teams, i);
-		for (int k = 0; k <= 3; k++)
-		{
-			divScalar += currDiv[k].keyOutput('p');
-		}
+		currDiv = getDivTeams(currConf, i, divScalar);
 		divScalar /= 4000;
+		std::cout << currDiv.size() << std::endl;
 		
-		test = currDiv[0];
-		pos = 0;
-		for (int j = 1; j <= 3; j++)
+		pos = i;
+		std::cout << pos << std::endl;
+		for (int j = 1; j < 5; j++)
 		{
 			test.scaledPPI(divScalar);
 			currDiv[j].scaledPPI(divScalar);
 			if (currDiv[j] > test)
 			{
+				std::cout << currDiv[j] << std::endl;
+				std::cout << test << std::endl;
+				std::cout << j << std::endl;
+				pos += 1;
+				std::cout << pos << std::endl;
 				test = currDiv[j];
-				pos = j;
+				std::cout << "IF STATMENT TRUE" << std::endl;
 			}
+			else
+			{
+				std::cout << currDiv[j] << "ELSE clause for " << currDiv[j]  << std::endl;
+			}
+			test = currDiv[j];
+			bracketNFC.push_back(test);
+			std::cout <<  " Highest position in the division " << test <<" at " << pos << std::endl;
 		}
-		bracketNFC.push_back(test);
+		
+		std::cout << i << " NFC Counter" << std::endl;
 	}
 	//get NFC wild cards
 	getWildCards(currConf, bracketNFC);
 	//reorderVec(bracketNFC);
-
-
+	__noop;
+/*
 	for (int i = 0; i <= 31; i++)
 	{
 		if (temp[i].getDivVal() == 5 || temp[i].getDivVal() == 4 || temp[i].getDivVal() == 6 || temp[i].getDivVal() == 7)
@@ -332,7 +349,7 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 	}
 	//get AFC wild cards
 	getWildCards(currConf, bracketAFC);
-
+	*/
 	std::cout << bracketAFC.size() << std::endl;
 	std::cout << bracketNFC.size() << std::endl;
 	__noop;
@@ -340,16 +357,22 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 }
 
 
-vector<Team> getDivTeams(vector<Team> teams, int inDiv)
+vector<Team> getDivTeams(vector<Team> teams, int inDiv, int& divScalar)
 {
 	vector<Team> retVal;
 
-	for (int i = 0; i <= 31; i++)
+	for (int i = 0; i <= 15; i++)
 	{
 		if (teams[i].getDivVal() == inDiv)
 		{
 			retVal.push_back(teams[i]);
 		}
+
+	}
+	for (int k = 0; k <= 3; k++)
+	{
+		divScalar += retVal[k].keyOutput('p');
+		//std::cout << k << "get Division Scalar" << std::endl;
 	}
 	return retVal;
 }
@@ -357,9 +380,9 @@ vector<Team> getDivTeams(vector<Team> teams, int inDiv)
 void getWildCards(vector<Team> source, vector<Team>& destination)
 {
 	reorderVec(source);
-	Team temp;
-	int cards = 0, size = source.size() - 1;
-	for (int i = 0; i <= size; i++)
+	Team temp(source[1]);
+	int cards = 0;
+	for (int i = 0; i < source.size(); i++)
 	{
 		if (cards <= 2)
 		{
@@ -370,5 +393,10 @@ void getWildCards(vector<Team> source, vector<Team>& destination)
 				cards += 1;
 			}
 		}
+	}
+	destination.pop_back();
+	for (int j = 0; j < destination.size(); j++)
+	{
+		std::cout << destination[j] << std::endl;
 	}
 }

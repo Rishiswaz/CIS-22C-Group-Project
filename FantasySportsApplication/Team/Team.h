@@ -96,16 +96,16 @@ public:
 	Team & operator=(const Team& rhs) 
 	{
 //LHS (destination)    =     RHS (source)
-		Team dummy;
-		dummy.wins = rhs.wins;
-		dummy.losses = rhs.yards;
-		dummy.yards = rhs.yards;
-		dummy.percentage = rhs.percentage;
-		dummy.PPI = rhs.PPI;
-		dummy.division = rhs.division;
-		dummy.percentage = rhs.percentage;
-		dummy.teamName = rhs.teamName;
-		return dummy;
+		
+		wins = rhs.wins;
+		losses = rhs.yards;
+		yards = rhs.yards;
+		percentage = rhs.percentage;
+		PPI = rhs.PPI;
+		division = rhs.division;
+		percentage = rhs.percentage;
+		teamName = rhs.teamName;
+		return *this;
 	};
 	friend std::ostream& operator<<(std::ostream& os, Team& dt)
 	{
@@ -205,8 +205,14 @@ Team::Team(std::string name, int win, int loss, int yard, double percent, int di
 }
 Team::Team()
 {
-	//Input from file
-	
+	wins = 0;
+	losses = 0;
+	yards = 0;
+	PPI = 0;
+	division = 0;
+	stringASCII = 0;
+	percentage = 0.0;
+	teamName = "";
 }
 
 Team::~Team()
