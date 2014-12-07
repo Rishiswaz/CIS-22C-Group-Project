@@ -274,12 +274,22 @@ vector<Team> playoffBracket(vector<Team> teams)
 			currConf.push_back(temp[i]);
 		}
 	}
-		bracketNFC = buildPlayoffBracket(currConf);
+	bracketNFC = buildPlayoffBracket(currConf);
 	//get NFC wild cards
 	getWildCards(currConf, bracketNFC);
 	//reorderVec(bracketNFC);
-	__noop;
-
+	currConf.clear();
+	currDiv.clear();
+	//GET AFC
+	for (int i = 0; i <= 31; i++)
+	{
+		if (temp[i].getDivVal() == 5 || temp[i].getDivVal() == 6 || temp[i].getDivVal() == 7 || temp[i].getDivVal() == 8)
+		{
+			currConf.push_back(temp[i]);
+		}
+	}
+	bracketAFC = buildPlayoffBracket(currConf);
+	getWildCards(currConf, bracketAFC);
 	std::cout << bracketAFC.size() << std::endl;
 	std::cout << bracketNFC.size() << std::endl;
 	__noop;
@@ -293,15 +303,16 @@ vector<Team> buildPlayoffBracket(vector<Team> currConf)
 	int divScalar;
 	for (int i = 1; i <= 4; i++)
 	{
-		//NFC Playoff bracket no wildcard
-		currDiv.clear();
+		if (currDiv.empty() != true)
+		{
+					currDiv.clear();
+		}
 		currDiv = getDivTeams(currConf, i, divScalar);
 		for (int j = 0; j < currDiv.size(); j++)
 		{
 			currDiv[j].scaledPPI(divScalar);
 			std::cout << currDiv[j] << " scaled current division" << std::endl;
 		}
-
 		test = *std::max_element(currDiv.begin(), currDiv.end());
 		bracket.push_back(test);
 		std::cout << " START PLAYOFF BRACKET" << std::endl;
@@ -313,11 +324,13 @@ vector<Team> buildPlayoffBracket(vector<Team> currConf)
 	return bracket;
 }
 
-
 vector<Team> getDivTeams(vector<Team> teams, int inDiv, int& divScalar)
 {
 	vector<Team> retVal;
-	
+	vector<int> temp;
+	int pos;
+	int tempDiv=0;
+
 	for (int i = 0; i <= 15; i++)
 	{
 		if (teams[i].getDivVal() == inDiv)
@@ -326,36 +339,67 @@ vector<Team> getDivTeams(vector<Team> teams, int inDiv, int& divScalar)
 		}
 
 	}
+	
+	pos = 0;
 	for (int k = 0; k <= 3; k++)
 	{
-		divScalar += retVal[k].keyOutput('p');
+		if (k != pos)
+		{
+			k = pos;
+		}
+		else
+		{
+			std::cout << temp.size() << std::endl;
+			std::cout << retVal.size() << std::endl;
+			temp.push_back(retVal[k].getDivVal());
+		}
+		pos += 1;
 	}
+	for (int i = 0; i < temp.size(); i++)
+	{
+		tempDiv += temp[i];
+	}
+
 	divScalar /= 4000;
 	if (divScalar < 0)
 		divScalar *= -1;
+	else if (divScalar == 0)
+	{
+		
+	}
+	
+	
 	return retVal;
 }
 
+
 void getWildCards(vector<Team> source, vector<Team>& destination)
 {
-	reorderVec(source);
-	Team temp(source[1]);
-	int cards = 0;
-	for (int i = 0; i < source.size(); i++)
-	{
-		if (cards <= 2)
+	int size,teamsAdded;
+	Team temp;
+	vector<Team> contenders;
+
+	if (source.size() < destination.size())
 		{
-			if (source[i] != destination[i])
-			{
-				temp = source[i];
-				destination.push_back(temp);
-				cards += 1;
-			}
+			size = source.size();
+		}
+	else
+		{
+			size = destination.size();
+		}
+
+	for (int i = 0; i < size; i++)
+	{
+		if (source[i] != destination[i])
+		{
+			contenders.push_back(source[i]);
 		}
 	}
-	destination.pop_back();
-	for (int j = 0; j < destination.size(); j++)
+
+	for (int i = 0; i < 2;i++)
 	{
-		std::cout << destination[j] << std::endl;
+		destination.push_back(contenders[i]);
 	}
+
+	system("PAUSE");
 }

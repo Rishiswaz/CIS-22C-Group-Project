@@ -217,6 +217,9 @@ public:
 			break;
 		}
 	};
+
+
+
 private:
 	//explanation for values will be added in a txt file (ie:frDownPerGame: First Downs Per Game)
 	int wins, losses, yards, PPI, division,stringASCII;
