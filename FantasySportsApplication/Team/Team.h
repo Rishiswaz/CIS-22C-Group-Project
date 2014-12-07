@@ -12,6 +12,10 @@ public:
 	Team();
 	Team(std::string, int, int, int, double, int);
 	~Team();
+	void scaledPPI(int divScalar)
+	{
+		PPI *= PPI*divScalar*percentage;
+	}
 	//to access private member yards for the key for the hash table
 	int keyOutput()
 	{
@@ -109,6 +113,46 @@ public:
 			<< "In the "<<dt.getDiv()<< " with a PPI of "<< dt.PPI<<std::endl;
 		return os;
 	}
+	bool operator < (const Team rhs)
+	{
+		if (PPI < rhs.PPI)
+			return true;
+		else
+		{
+			return false;
+		}
+	};
+	bool operator > (const Team rhs)
+	{
+		if (PPI > rhs.PPI)
+			return true;
+		else
+		{
+			return false;
+		}
+	};
+	bool operator == (const Team rhs)
+	{
+		if (PPI == rhs.PPI && wins == rhs.wins && losses == rhs.losses && yards==rhs.yards && teamName == rhs.teamName)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	};
+	bool operator != (const Team rhs)
+	{
+		if (PPI == rhs.PPI && wins == rhs.wins && losses == rhs.losses && yards == rhs.yards && teamName == rhs.teamName)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	};
 	int nameToInt()
 	{
 		stringASCII = 0;

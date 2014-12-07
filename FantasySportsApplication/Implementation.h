@@ -17,6 +17,7 @@ vector<Team> getDivTeams(vector<Team> teams, int inDiv);
 int exit(vector<Team> teams);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
+void getWildCards(vector<Team>, vector<Team>&);
 void buildTree(vector<Team> teams, CBinaryTree& tree);
 void sortedOutputImp(int displayTeamsIn, vector<Team> teams, HashTable<int, Team> &hashTable);
 void displayMenuImp(int passedVal)
@@ -225,16 +226,45 @@ int exit(vector<Team> teams)
 	return retVal;
 }
 
+void reorderVec(vector<Team>& teams)
+{
+	int size = teams.size() - 1;
+	Team test = teams[0], tempTeam;
+	for (int i = 1; i <= size; i++)
+	{
+		if (teams[i] > test)
+		{
+			tempTeam = teams[i-1];
+			teams[i - 1] = teams[i];
+			teams[i] = tempTeam;
+			test = teams[i - 1];
+			i -= 2;
+		}
+	}
+}
+
+
 vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 {
 	vector<Team> bracket;
 	vector<Team> bracketAFC;
 	vector<Team> bracketNFC;
 	vector<Team> currDiv;
+	vector<Team> currConf;
 	vector<Team> temp;
 	Team test;
-	int currPPI, testPPI, divScalar = 0;
-	bool done;
+	int pos, divScalar = 0;
+
+	temp = teams;
+	reorderVec(temp);
+	//GET NFC
+	for (int i = 0; i <= 31; i++)
+	{
+		if (temp[i].getDivVal() == 1 || temp[i].getDivVal() == 2 || temp[i].getDivVal() == 3 || temp[i].getDivVal() == 4)
+		{
+			currConf.push_back(temp[i]);
+		}
+	}
 
 
 	for (int i = 1; i <= 4; i++)
@@ -246,23 +276,31 @@ vector<Team> playoffBracket(vector<Team> teams, HashTable<int, Team> hashTable)
 			divScalar += currDiv[k].keyOutput('p');
 		}
 		divScalar /= 4000;
+		
 		test = currDiv[0];
+		pos = 0;
 		for (int j = 1; j <= 3; j++)
 		{
-			testPPI = test.keyOutput('p');
-			testPPI *= divScalar;
-			currPPI = currDiv[j].keyOutput('p');
-			currPPI *= divScalar;
-			if (currPPI > testPPI)
+			test.scaledPPI(divScalar);
+			currDiv[j].scaledPPI(divScalar);
+			if (currDiv[j] > test)
 			{
 				test = currDiv[j];
+				pos = j;
 			}
 		}
 		bracketNFC.push_back(test);
+	
 	}
+	//get NFC wild cards
+	getWildCards(currConf, bracketNFC);
+	reorderVec(bracketNFC);
 	for (int i = 0; i <= 31; i++)
 	{
-
+		if (temp[i].getDivVal() == 5 || temp[i].getDivVal() == 4 || temp[i].getDivVal() == 6 || temp[i].getDivVal() == 7)
+		{
+			currConf.push_back(temp[i]);
+		}
 	}
 
 	return bracket;
@@ -281,4 +319,23 @@ vector<Team> getDivTeams(vector<Team> teams, int inDiv)
 		}
 	}
 	return retVal;
+}
+
+void getWildCards(vector<Team> source, vector<Team>& destination)
+{
+	reorderVec(source);
+	Team temp;
+	int cards = 0, size = source.size() - 1;
+	for (int i = 0; i <= size; i++)
+	{
+		if (cards <= 2)
+		{
+			if (source[i] != destination[i])
+			{
+				temp = source[i];
+				destination.push_back(temp);
+				cards += 1;
+			}
+		}
+	}
 }
