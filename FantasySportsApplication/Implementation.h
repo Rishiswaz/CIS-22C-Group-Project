@@ -13,9 +13,11 @@
 #include <fstream>
 #include <ostream>
 #include <strstream>
+#include <algorithm>
 vector<Team> getDivTeams(vector<Team> teams, int inDiv, int& divScalar);
 int exit(vector<Team> teams);
 vector<Team> playoffBracket(vector<Team> teams);
+vector<Team> buildPlayoffBracket(vector<Team> currConf);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
 void getWildCards(vector<Team>, vector<Team>&);
@@ -263,7 +265,6 @@ vector<Team> playoffBracket(vector<Team> teams)
 	vector<Team> temp= teams;
 	
 	int pos=0, divScalar = 0;
-
 	reorderVec(temp);
 	//GET NFC
 	for (int i = 0; i <= 31; i++)
@@ -272,87 +273,43 @@ vector<Team> playoffBracket(vector<Team> teams)
 		{
 			currConf.push_back(temp[i]);
 		}
-		
 	}
-
-	Team test;
-	for (int i = 1; i <= 4; i++)
-	{
-		//NFC Playoff bracket no wildcard
-		currDiv = getDivTeams(currConf, i, divScalar);
-		divScalar /= 4000;
-		std::cout << currDiv.size() << std::endl;
-		
-		pos = i;
-		std::cout << pos << std::endl;
-		for (int j = 1; j < 5; j++)
-		{
-			test.scaledPPI(divScalar);
-			currDiv[j].scaledPPI(divScalar);
-			if (currDiv[j] > test)
-			{
-				std::cout << currDiv[j] << std::endl;
-				std::cout << test << std::endl;
-				std::cout << j << std::endl;
-				pos += 1;
-				std::cout << pos << std::endl;
-				test = currDiv[j];
-				std::cout << "IF STATMENT TRUE" << std::endl;
-			}
-			else
-			{
-				std::cout << currDiv[j] << "ELSE clause for " << currDiv[j]  << std::endl;
-			}
-			test = currDiv[j];
-			bracketNFC.push_back(test);
-			std::cout <<  " Highest position in the division " << test <<" at " << pos << std::endl;
-		}
-		
-		std::cout << i << " NFC Counter" << std::endl;
-	}
+		bracketNFC = buildPlayoffBracket(currConf);
 	//get NFC wild cards
 	getWildCards(currConf, bracketNFC);
 	//reorderVec(bracketNFC);
 	__noop;
-/*
-	for (int i = 0; i <= 31; i++)
-	{
-		if (temp[i].getDivVal() == 5 || temp[i].getDivVal() == 4 || temp[i].getDivVal() == 6 || temp[i].getDivVal() == 7)
-		{
-			currConf.push_back(temp[i]);
-		}
-	}
 
-	for (int i = 5; i <= 8; i++)
-	{
-		//AFC Playoff bracket no wildcard
-		currDiv = getDivTeams(teams, i);
-		for (int k = 0; k <= 3; k++)
-		{
-			divScalar += currDiv[k].keyOutput('p');
-		}
-		divScalar /= 4000;
-
-		test = currDiv[0];
-		pos = 0;
-		for (int j = 1; j <= 3; j++)
-		{
-			test.scaledPPI(divScalar);
-			currDiv[j].scaledPPI(divScalar);
-			if (currDiv[j] > test)
-			{
-				test = currDiv[j];
-				pos = j;
-			}
-		}
-		bracketNFC.push_back(test);
-	}
-	//get AFC wild cards
-	getWildCards(currConf, bracketAFC);
-	*/
 	std::cout << bracketAFC.size() << std::endl;
 	std::cout << bracketNFC.size() << std::endl;
 	__noop;
+	return bracket;
+}
+
+vector<Team> buildPlayoffBracket(vector<Team> currConf)
+{
+	vector<Team> temporary, currDiv, bracket;
+	Team test;
+	int divScalar;
+	for (int i = 1; i <= 4; i++)
+	{
+		//NFC Playoff bracket no wildcard
+		currDiv.clear();
+		currDiv = getDivTeams(currConf, i, divScalar);
+		for (int j = 0; j < currDiv.size(); j++)
+		{
+			currDiv[j].scaledPPI(divScalar);
+			std::cout << currDiv[j] << " scaled current division" << std::endl;
+		}
+
+		test = *std::max_element(currDiv.begin(), currDiv.end());
+		bracket.push_back(test);
+		std::cout << " START PLAYOFF BRACKET" << std::endl;
+		for (int j = 0; j < temporary.size(); j++)
+		{
+			std::cout << bracket[j] << "** Playoff Bracket **" << std::endl;
+		}
+	}
 	return bracket;
 }
 
@@ -360,7 +317,7 @@ vector<Team> playoffBracket(vector<Team> teams)
 vector<Team> getDivTeams(vector<Team> teams, int inDiv, int& divScalar)
 {
 	vector<Team> retVal;
-
+	
 	for (int i = 0; i <= 15; i++)
 	{
 		if (teams[i].getDivVal() == inDiv)
@@ -372,8 +329,10 @@ vector<Team> getDivTeams(vector<Team> teams, int inDiv, int& divScalar)
 	for (int k = 0; k <= 3; k++)
 	{
 		divScalar += retVal[k].keyOutput('p');
-		//std::cout << k << "get Division Scalar" << std::endl;
 	}
+	divScalar /= 4000;
+	if (divScalar < 0)
+		divScalar *= -1;
 	return retVal;
 }
 

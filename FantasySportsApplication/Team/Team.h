@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 
 class Team
 {
@@ -98,7 +99,7 @@ public:
 //LHS (destination)    =     RHS (source)
 		
 		wins = rhs.wins;
-		losses = rhs.yards;
+		losses = rhs.losses;
 		yards = rhs.yards;
 		percentage = rhs.percentage;
 		PPI = rhs.PPI;
@@ -124,13 +125,43 @@ public:
 	};
 	bool operator > (const Team rhs)
 	{
+		
 		if (PPI > rhs.PPI)
 			return true;
 		else
 		{
 			return false;
 		}
+		
+		
 	};
+	bool operator >= (const Team rhs)
+	{
+
+		if (PPI >= rhs.PPI)
+			return true;
+		else
+		{
+			return false;
+		}
+
+
+	};
+
+	bool operator <= (const Team rhs)
+	{
+
+		if (PPI <= rhs.PPI)
+			return true;
+		else
+		{
+			return false;
+		}
+
+
+	};
+
+
 	bool operator == (const Team rhs)
 	{
 		if (PPI == rhs.PPI && wins == rhs.wins && losses == rhs.losses && yards==rhs.yards && teamName == rhs.teamName)
