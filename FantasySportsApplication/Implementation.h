@@ -22,7 +22,7 @@ vector<Team> buildPlayoffBracket(vector<Team> currConf, int AFC);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
 void getWildCards(vector<Team>, vector<Team>&);
-void buildTree(vector<Team> teams, CBinaryTree& tree);
+void buildTree(vector<Team> teams, CBinaryTree& tree, char key);
 void sortedOutputImp(int displayTeamsIn, vector<Team> teams, HashTable<int, Team> &hashTable);
 void displayMenuImp(int passedVal)
 {
@@ -113,13 +113,14 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 	case 4:
 		playoffDisplay(playoffBracket(teams));
 		system("PAUSE");
+		mainMenueImp(0, teams, hashTable);
 		break;
 	case 5:
 		efficeincies(teams, hashTable);
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 6:
-		mainMenueImp(exit(teams), teams, hashTable);
+		exit(teams);
 			break;
 	default:
 		break;
@@ -142,7 +143,18 @@ void sortedOutputImp(int displayTeamsIn, vector<Team> teams, HashTable<int, Team
 		{
 		case 0: mainMenueImp(0, teams, hashTable);
 			break;
-		case 1:  buildTree(teams, tree);
+		case 1:  buildTree(teams, tree, 'y');
+			tree.inorderTree(tree.root);
+		case 2: buildTree(teams, tree, 'w');
+			tree.inorderTree(tree.root);
+			break;
+		case 3: buildTree(teams, tree, 'l');
+			tree.inorderTree(tree.root);
+			break;
+		case 4: buildTree(teams, tree, 'p');
+			tree.inorderTree(tree.root);
+			break;
+		case 5: buildTree(teams, tree, 'n');
 			tree.inorderTree(tree.root);
 			break;
 		default:
@@ -173,11 +185,11 @@ void implementation()
 }
 
 
-void buildTree(vector<Team> teams, CBinaryTree& tree)
+void buildTree(vector<Team> teams, CBinaryTree& tree, char key)
 {
 	for (int i = 0; i <= 31; i++)
 	{
-		tree.insertNode(teams[i].keyOutput('y'), teams[i]);
+		tree.insertNode(teams[i].keyOutput(key), teams[i]);
 	};
 }
 
@@ -302,7 +314,6 @@ vector<Team> playoffBracket(vector<Team> teams)
 	{
 		bracket.push_back(bracketAFC[j]);
 	}
-	system("PAUSE");
 	return bracket;
 }
 vector<Team> buildPlayoffBracket(vector<Team> currConf)
@@ -427,6 +438,4 @@ void getWildCards(vector<Team> source, vector<Team>& destination)
 	{
 		destination.push_back(source[i]);
 	}
-
-	system("PAUSE");
 }

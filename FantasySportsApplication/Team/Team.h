@@ -16,7 +16,7 @@ public:
 	std::ostringstream playoffOutput (int pos)
 	{
 		std::ostringstream output;
-		output << " From the " << getDiv() << " The "<< teamName <<" with the "<< pos<< " seed" << std::endl;
+		output << " From the " << getDiv() << " The "<< teamName <<" with the "<< pos<< " seed";
 		return output;
 	}
 	void scaledPPI(int divScalar)
