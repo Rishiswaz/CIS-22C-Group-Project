@@ -111,7 +111,8 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 4:
-		playoffTeams = playoffBracket(teams);
+		playoffTeams = playoffBracket(teams); 
+		system("PAUSE");
 		break;
 	case 5:
 		efficeincies(teams, hashTable);
@@ -248,7 +249,6 @@ void reorderVec(vector<Team>& teams)
 		temp = teams[i];
 		teams[i] = teams[pos];
 		teams[pos] = temp;
-		std::cout << i << "reorder counter" << std::endl;
 	}
 
 		
@@ -263,9 +263,9 @@ vector<Team> playoffBracket(vector<Team> teams)
 	vector<Team> bracketNFC;
 	vector<Team> currDiv;
 	vector<Team> currConf;
-	vector<Team> temp= teams;
-	
-	int pos=0, divScalar = 0;
+	vector<Team> temp = teams;
+
+	int pos = 0, divScalar = 0;
 	reorderVec(temp);
 	//GET NFC
 	for (int i = 0; i <= 31; i++)
@@ -294,17 +294,15 @@ vector<Team> playoffBracket(vector<Team> teams)
 	//Get AFC Wildcards
 	getWildCards(currConf, bracketAFC);
 
-	for (int i = 0; i <= 2; i++)
+	for (int j = 0; j <= 5; j++)
 	{
-		for (int j = 0; j <= 5; j++)
-		{
-			bracket.push_back(bracketNFC[j]);
-		}
-		for (int j = 0; j <= 5; j++)
-		{
-			bracket.push_back(bracketAFC[j]);
-		}
+		bracket.push_back(bracketNFC[j]);
 	}
+	for (int j = 0; j <= 5; j++)
+	{
+		bracket.push_back(bracketAFC[j]);
+	}
+	system("PAUSE");
 	return bracket;
 }
 vector<Team> buildPlayoffBracket(vector<Team> currConf)
@@ -395,8 +393,6 @@ vector<Team> getDivTeams(vector<Team>& teams, int inDiv, int& divScalar)
 		}
 		else
 		{
-			//std::cout << temp.size() << std::endl;
-			std::cout << retVal.size() << std::endl;
 			tempInt = retVal[k].keyOutput('p');
 			temp.push_back(tempInt);
 		}
