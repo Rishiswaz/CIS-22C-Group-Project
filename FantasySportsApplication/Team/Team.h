@@ -170,9 +170,44 @@ public:
 
 	bool operator == (const Team rhs)
 	{
-		if (PPI == rhs.PPI && wins == rhs.wins && losses == rhs.losses && yards==rhs.yards && teamName == rhs.teamName)
+		if (PPI == rhs.PPI)
 		{
-			return true;
+			if(wins == rhs.wins)
+			{
+				if (losses == rhs.losses)
+				{
+					if (yards == rhs.yards)
+					{
+						if (teamName == rhs.teamName)
+						{
+							if (percentage == rhs.percentage)
+							{
+								return true;
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else
+						{
+							return false;
+						}
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
@@ -181,9 +216,44 @@ public:
 	};
 	bool operator != (const Team rhs)
 	{
-		if (PPI == rhs.PPI && wins == rhs.wins && losses == rhs.losses && yards == rhs.yards && teamName == rhs.teamName)
+		if (PPI == rhs.PPI)
 		{
-			return false;
+			if (wins == rhs.wins)
+			{
+				if (losses == rhs.losses)
+				{
+					if (yards == rhs.yards)
+					{
+						if (teamName == rhs.teamName)
+						{
+							if (percentage == rhs.percentage)
+							{
+								return false;
+							}
+							else
+							{
+								return true;
+							}
+						}
+						else
+						{
+							return true;
+						}
+					}
+					else
+					{
+						return true;
+					}
+				}
+				else
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return true;
+			}
 		}
 		else
 		{

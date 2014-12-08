@@ -21,7 +21,7 @@ vector<Team> buildPlayoffBracket(vector<Team> currConf);
 vector<Team> buildPlayoffBracket(vector<Team> currConf, int AFC);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
-void getWildCards(vector<Team>, vector<Team>, vector<Team>&);
+void getWildCards(vector<Team>, vector<Team>&);
 void buildTree(vector<Team> teams, CBinaryTree& tree);
 void sortedOutputImp(int displayTeamsIn, vector<Team> teams, HashTable<int, Team> &hashTable);
 void displayMenuImp(int passedVal)
@@ -277,7 +277,7 @@ vector<Team> playoffBracket(vector<Team> teams)
 	}
 	bracketNFC = buildPlayoffBracket(currConf);
 	//get NFC wild cards
-	getWildCards(currConf, bracketNFC, bracketNFC);
+	getWildCards(currConf, bracketNFC);
 	//reorderVec(bracketNFC);
 	currConf.clear();
 	currDiv.clear();
@@ -292,7 +292,7 @@ vector<Team> playoffBracket(vector<Team> teams)
 	//get AFC Div Leaders
 	bracketAFC = buildPlayoffBracket(currConf, 1);
 	//Get AFC Wildcards
-	getWildCards(currConf, bracketAFC, bracketAFC);
+	getWildCards(currConf, bracketAFC);
 
 	for (int j = 0; j <= 5; j++)
 	{
@@ -405,38 +405,27 @@ vector<Team> getDivTeams(vector<Team>& teams, int inDiv, int& divScalar)
 	
 	return retVal;
 }
-void getWildCards(vector<Team> source, vector<Team> currentBracket, vector<Team>& destination)
+void getWildCards(vector<Team> source, vector<Team>& destination)
 {
 	int size,teamsAdded;
-	vector<Team> temp;
+	vector<Team> temp = destination;
+	reorderVec(temp);
+	reorderVec(source);
 	vector<Team> contenders;
+	bool isWild = true, test;
 
-	if (source.size() < destination.size())
-		{
-			size = source.size();
-		}
-	else
-		{
-			size = destination.size();
-		}
-
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < temp.size(); i++)
 	{
-		if (source[i] != destination[i])
+		vector<Team>::iterator position = std::find(source.begin(), source.end(), temp[i]);
+		if (position != source.end())
 		{
-			std::cout<<"source: " << source[i] << " destination: " << destination[i] << std::endl;
-			contenders.push_back(source[i]);
+			source.erase(position);
 		}
 	}
 
-	for (int i = 0; i < contenders.size();i++)
+	for (int i = 3; i < source.size(); i++)
 	{
-		if (destination.size() != 6)
-		{
-			if (contenders[i] != destination[destination.size() - 1])
-
-				destination.push_back(contenders[i]);
-		}
+		destination.push_back(source[i]);
 	}
 
 	system("PAUSE");
