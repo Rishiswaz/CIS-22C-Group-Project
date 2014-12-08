@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <ctime>
+#include <sstream>
 
 class Team
 {
@@ -13,6 +13,12 @@ public:
 	Team();
 	Team(std::string, int, int, int, double, int);
 	~Team();
+	std::ostringstream playoffOutput (int pos)
+	{
+		std::ostringstream output;
+		output << " From the " << getDiv() << " The "<< teamName <<" with the "<< pos<< " seed" << std::endl;
+		return output;
+	}
 	void scaledPPI(int divScalar)
 	{
 		PPI *= PPI*divScalar*percentage;

@@ -21,7 +21,7 @@ vector<Team> buildPlayoffBracket(vector<Team> currConf);
 vector<Team> buildPlayoffBracket(vector<Team> currConf, int AFC);
 void efficeincies(vector<Team> teams, HashTable<int, Team> hashTable);
 int treeSelection();
-void getWildCards(vector<Team>, vector<Team>&);
+void getWildCards(vector<Team>, vector<Team>, vector<Team>&);
 void buildTree(vector<Team> teams, CBinaryTree& tree);
 void sortedOutputImp(int displayTeamsIn, vector<Team> teams, HashTable<int, Team> &hashTable);
 void displayMenuImp(int passedVal)
@@ -111,7 +111,7 @@ void mainMenueImp(int choice, vector<Team> teams, HashTable<int, Team> hashTable
 		mainMenueImp(0, teams, hashTable);
 		break;
 	case 4:
-		playoffTeams = playoffBracket(teams); 
+		playoffDisplay(playoffBracket(teams));
 		system("PAUSE");
 		break;
 	case 5:
@@ -277,7 +277,7 @@ vector<Team> playoffBracket(vector<Team> teams)
 	}
 	bracketNFC = buildPlayoffBracket(currConf);
 	//get NFC wild cards
-	getWildCards(currConf, bracketNFC);
+	getWildCards(currConf, bracketNFC, bracketNFC);
 	//reorderVec(bracketNFC);
 	currConf.clear();
 	currDiv.clear();
@@ -292,7 +292,7 @@ vector<Team> playoffBracket(vector<Team> teams)
 	//get AFC Div Leaders
 	bracketAFC = buildPlayoffBracket(currConf, 1);
 	//Get AFC Wildcards
-	getWildCards(currConf, bracketAFC);
+	getWildCards(currConf, bracketAFC, bracketAFC);
 
 	for (int j = 0; j <= 5; j++)
 	{
@@ -356,10 +356,8 @@ vector<Team> getDivTeams(vector<Team>& teams, int inDiv, int& divScalar)
 	int pos;
 	int tempDiv=0;
 
-	std::cout << retVal.size() << std::endl;
 	retVal = { dummy,dummy,dummy,dummy};
 	temp.resize(4);
-	std::cout << retVal.size() << std::endl;
 
 
 	for (int i = 0; i <= 15; i++)
@@ -385,11 +383,9 @@ vector<Team> getDivTeams(vector<Team>& teams, int inDiv, int& divScalar)
 	pos = 0;
 	for (int k = 0; k <= 3; k++)
 	{
-		std::cout << retVal.size() << std::endl;
 		if (k != pos)
 		{
 			k = pos;
-			std::cout << retVal.size() << std::endl;
 		}
 		else
 		{
@@ -409,10 +405,10 @@ vector<Team> getDivTeams(vector<Team>& teams, int inDiv, int& divScalar)
 	
 	return retVal;
 }
-void getWildCards(vector<Team> source, vector<Team>& destination)
+void getWildCards(vector<Team> source, vector<Team> currentBracket, vector<Team>& destination)
 {
 	int size,teamsAdded;
-	Team temp;
+	vector<Team> temp;
 	vector<Team> contenders;
 
 	if (source.size() < destination.size())
@@ -428,13 +424,19 @@ void getWildCards(vector<Team> source, vector<Team>& destination)
 	{
 		if (source[i] != destination[i])
 		{
+			std::cout<<"source: " << source[i] << " destination: " << destination[i] << std::endl;
 			contenders.push_back(source[i]);
 		}
 	}
 
-	for (int i = 0; i < 2;i++)
+	for (int i = 0; i < contenders.size();i++)
 	{
-		destination.push_back(contenders[i]);
+		if (destination.size() != 6)
+		{
+			if (contenders[i] != destination[destination.size() - 1])
+
+				destination.push_back(contenders[i]);
+		}
 	}
 
 	system("PAUSE");

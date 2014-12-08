@@ -131,3 +131,20 @@ auto displayTeams(vector<Team>teams)
 }
 
 
+void playoffDisplay(vector<Team> bracket)
+{
+	std::cout << setfill('*') << setw(100);
+	std::cout << "******************************************************************************************" << std::endl;
+	std::cout << "***          NFL                         PLAYOFFS                  2015                ***" << std::endl;
+	std::cout << "******************************************************************************************" << std::endl;
+	std::cout << "**                                                                                      **" << std::endl;
+	std::cout << "**                                                                                      **" << std::endl;
+	std::cout << "******************************************************************************************" << std::endl;
+	std::cout << "**                                        NFC                                           **" << std::endl;
+	std::cout << "******************************************************************************************" << std::endl;
+	for (int i = 0; i <= 5; i++)
+	{
+		std::cout << "**" << bracket[i].playoffOutput(i).str() << "                                       **" << std::endl;
+	}
+}
+
