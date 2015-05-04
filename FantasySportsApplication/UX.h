@@ -101,7 +101,7 @@ void addMenu()
 }
 
 //BIG NOTE!!! PLEASE READ for this class please if you are not using C++14 put "-> int" after the input parameters
-auto displayTeams(vector<Team>teams)
+auto displayTeams(vector<Team>teams) -> int
 {
 	//uses C++14 function definition, please read the comment above the function definition for proper C++11 syntax
 	char charInput= ' ';
