@@ -21,7 +21,16 @@ public:
 	}
 	void scaledPPI(int divScalar)
 	{
-		PPI *= PPI*divScalar*percentage;
+		PPI *= PPI*divScalar*percentage; 
+		if (wins >= 8)
+		{
+			PPI += (wins*divScalar)*percentage;
+		}
+		else
+		{
+			PPI -= (wins*divScalar)*percentage;
+		}
+
 	}
 	//to access private member yards for the key for the hash table
 	int keyOutput()
